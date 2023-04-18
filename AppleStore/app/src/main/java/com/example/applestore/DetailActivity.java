@@ -22,7 +22,7 @@ public class DetailActivity extends AppCompatActivity {
         if (bundle != null){
             detailImage.setImageResource(bundle.getInt("Image"));
             detailTitle.setText(bundle.getString("Title"));
-            detailDesc.setText(bundle.getInt("Desc"));
+            detailDesc.setText(bundle.getString("Desc"));
         }
     }
 }

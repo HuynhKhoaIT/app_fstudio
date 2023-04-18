@@ -16,6 +16,7 @@ import java.util.List;
 public class BlogFragment extends Fragment {
     private Context context;
     private RecyclerView mRecyclerView;
+    BlogAdapter adapter;
     public BlogFragment() {}
 
     @Override
@@ -24,6 +25,7 @@ public class BlogFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_blog, container, false);
         mRecyclerView = view.findViewById(R.id.blog_list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+
         List<Blog> blogList = new ArrayList<>();
         Blog blog1 = new Blog(R.drawable.blog2, "Iphone","mô tả chi tiết tại đây nha mọi người!");
         Blog blog2 = new Blog(R.drawable.blog3, "Iphone 14","mô tả chi tiết tại đây nha mọi người!");
@@ -32,7 +34,8 @@ public class BlogFragment extends Fragment {
         blogList.add(blog1);
         blogList.add(blog2);
         blogList.add(blog3);
-        BlogAdapter adapter = new BlogAdapter(context, blogList);
+//        BlogAdapter adapter = new BlogAdapter(context, blogList);
+        adapter = new BlogAdapter(getActivity(), blogList);
         mRecyclerView.setAdapter(adapter);
         return view;
     }

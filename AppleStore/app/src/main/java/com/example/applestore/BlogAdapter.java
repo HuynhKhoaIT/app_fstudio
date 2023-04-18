@@ -18,10 +18,11 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
     private Context context;
     private List<Blog> blogList;
 
-    public BlogAdapter(Context context, List<Blog> blogList) {
-        this.context = context;
+    public BlogAdapter(Context applicationContext, List<Blog> blogList) {
+        this.context = applicationContext;
         this.blogList = blogList;
     }
+
 
     @NonNull
     @Override
@@ -36,7 +37,8 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
         Blog blog = blogList.get(position);
         holder.blogImage.setImageResource(blog.getImage());
         holder.blogName.setText(blog.getName());
-
+        System.out.println("11111111111111111111");
+        System.out.println(blog.getDesc());
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +46,8 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
                 intent.putExtra("Image", blogList.get(holder.getAdapterPosition()).getImage());
                 intent.putExtra("Title", blogList.get(holder.getAdapterPosition()).getName());
                 intent.putExtra("Desc", blogList.get(holder.getAdapterPosition()).getDesc());
+                System.out.println(intent);
+                System.out.println(context);
                 context.startActivity(intent);
             }
         });
