@@ -3,13 +3,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartFragment">
+    tools:context=".Fragment.CartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- List of Cart Items -->
+    <ListView
+        android:id="@+id/cart_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Cart"
-        android:textSize="50sp"/>
+        android:divider="@null"
+        android:dividerHeight="0dp" />
 
+    <!-- Header -->
+    <TextView
+        android:id="@+id/cart_header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Cart"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center" />
+
+    <!-- Subtotal -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/cart_subtotal_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/cart_subtotal_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/cart_subtotal_text"
+            android:layout_alignBaseline="@id/cart_subtotal_text"/>
+
+        <!-- Checkout Button -->
+        <Button
+            android:id="@+id/cart_checkout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Checkout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"/>
+
+    </RelativeLayout>
 </FrameLayout>
+
