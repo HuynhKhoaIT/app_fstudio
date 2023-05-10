@@ -6,30 +6,6 @@ public class Product {
     private String name;
     private int price;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setDes(String des) {
-        this.des = des;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public String getDes() {
-        return des;
-    }
-
     private int id;
 
     private int quantity;
@@ -68,5 +44,29 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getDes() {
+        return des;
     }
 }

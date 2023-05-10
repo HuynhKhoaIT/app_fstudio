@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
         productList.add(product3);
         productList.add(product4);
         productList.add(product5);
-        ProductAdapter adapter = new ProductAdapter(productList);
+        ProductAdapter adapter = new ProductAdapter(getActivity(),productList);
         mRecyclerView.setAdapter(adapter);
 
         ArrayList<SlideModel> slideModels = new ArrayList<>();

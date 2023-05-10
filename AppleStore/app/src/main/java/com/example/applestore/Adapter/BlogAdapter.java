@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applestore.model.Blog;
-import com.example.applestore.Activity.DetailActivity;
+import com.example.applestore.Activity.DetailBlogActivity;
 import com.example.applestore.R;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
+                Intent intent = new Intent(context, DetailBlogActivity.class);
                 intent.putExtra("Image", blogList.get(holder.getAdapterPosition()).getImage());
                 intent.putExtra("Title", blogList.get(holder.getAdapterPosition()).getName());
                 intent.putExtra("Desc", blogList.get(holder.getAdapterPosition()).getDesc());

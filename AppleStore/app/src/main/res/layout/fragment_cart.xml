@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.CartFragment"
+    android:background="#EFECEC"
     android:layout_marginBottom="50dp">
 
     <!-- List of Cart Items -->
@@ -64,7 +65,6 @@
             android:text="Checkout"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"/>
-
     </RelativeLayout>
 </FrameLayout>
 

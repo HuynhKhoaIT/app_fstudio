@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.applestore.R;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailBlogActivity extends AppCompatActivity {
     TextView detailDesc, detailTitle;
     ImageView detailImage;
     @Override
