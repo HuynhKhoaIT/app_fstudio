@@ -54,8 +54,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getName());
                 intent.putExtra("Price", mProductList.get(holder.getAdapterPosition()).getPriceString());
                 intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getDes());
-                System.out.println("Nguyễn huỳnh khoa");
-                System.out.println(mProductList);
                 context.startActivity(intent);
             }
         });
