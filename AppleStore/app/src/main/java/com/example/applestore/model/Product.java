@@ -5,12 +5,45 @@ public class Product {
     private int image;
     private String name;
     private int price;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    private int id;
+
+    private int quantity;
+
+    private String des;
     private NumberFormat format = NumberFormat.getCurrencyInstance();
 
-    public Product(int image, String name, int price) {
+    public Product(int image, String name, int price, int id, int quantity, String des) {
         this.image = image;
         this.name = name;
         this.price = price;
+        this.id = id;
+        this.quantity = quantity;
+        this.des = des;
     }
 
     public int getImage() {

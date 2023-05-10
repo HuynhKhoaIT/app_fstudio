@@ -37,11 +37,11 @@ public class HomeFragment extends Fragment {
 
 
         List<Product> productList = new ArrayList<>();
-        Product product1 = new Product(R.drawable.ipad, "Ipad", 100);
-        Product product2 = new Product(R.drawable.iphone, "Iphone 14", 25666000);
-        Product product3 = new Product(R.drawable.mac, "Macbook", 3200000);
-        Product product4 = new Product(R.drawable.watch, "Apple Watch", 1599000);
-        Product product5 = new Product(R.drawable.airtag, "tai nghe", 1390000);
+        Product product1 = new Product(R.drawable.ipad, "Ipad", 100, 1, 10,"Mô tả chi tiết");
+        Product product2 = new Product(R.drawable.iphone, "Iphone 14", 25666000, 2, 5, "Mô tả chi tiết nè");
+        Product product3 = new Product(R.drawable.mac, "Macbook", 3200000, 3, 8, "Mô tả nữa nè");
+        Product product4 = new Product(R.drawable.watch, "Apple Watch", 1599000,4, 10, "Mô tả đây nha");
+        Product product5 = new Product(R.drawable.airtag, "tai nghe", 1390000,5, 9 ," Mô tả nè ba");
 
         productList.add(product1);
         productList.add(product2);
