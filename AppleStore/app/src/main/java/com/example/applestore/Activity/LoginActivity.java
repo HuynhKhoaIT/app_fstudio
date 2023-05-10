@@ -58,33 +58,42 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = loginEmail.getText().toString();
                 String pass = loginPassword.getText().toString();
-
-                if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    if(!pass.isEmpty()){
-                        auth.signInWithEmailAndPassword(email, pass)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                        finish();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }else{
-                        loginPassword.setError("password cannot be empty");
-                    }
-                }else if(email.isEmpty()){
-                    loginEmail.setError("Email cannot be empty");
-                }else{
-                    loginEmail.setError("Please enter valid email");
-                }
+                signIn(email, pass);
             }
         });
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String email = loginEmail.getText().toString();
+//                String pass = loginPassword.getText().toString();
+//
+//                if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+//                    if(!pass.isEmpty()){
+//                        auth.signInWithEmailAndPassword(email, pass)
+//                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
+//                                    }
+//                                }).addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                    }else{
+//                        loginPassword.setError("password cannot be empty");
+//                    }
+//                }else if(email.isEmpty()){
+//                    loginEmail.setError("Email cannot be empty");
+//                }else{
+//                    loginEmail.setError("Please enter valid email");
+//                }
+//            }
+//        });
 
             signupRedirecText.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -129,5 +138,40 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void signIn(String email, String pass) {
+        if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            if(!pass.isEmpty()){
+                auth.signInWithEmailAndPassword(email, pass)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Đăng nhập thành công
+                                    // Chuyển sang màn hình chính
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    // Đăng nhập thất bại
+                                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            }else{
+                loginPassword.setError("password cannot be empty");
+            }
+        }else if(email.isEmpty()){
+            loginEmail.setError("Email cannot be empty");
+        }else{
+            loginEmail.setError("Please enter valid email");
+        }
     }
 }
