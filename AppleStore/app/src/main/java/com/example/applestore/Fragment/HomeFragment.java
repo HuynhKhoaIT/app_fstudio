@@ -34,8 +34,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 //        Ánh xạ
         imageSlider = view.findViewById(R.id.imageSlide);
-        mRecyclerView = view.findViewById(R.id.product_list);
         categoryRec = view.findViewById(R.id.categoryList);
+        mRecyclerView = view.findViewById(R.id.product_list);
+
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
