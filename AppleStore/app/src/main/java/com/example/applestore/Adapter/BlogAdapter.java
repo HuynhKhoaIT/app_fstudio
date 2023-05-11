@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.applestore.model.Blog;
 import com.example.applestore.Activity.DetailBlogActivity;
 import com.example.applestore.R;
@@ -39,15 +40,18 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
     @Override
     public void onBindViewHolder(@NonNull BlogViewHolder holder, int position) {
         Blog blog = blogList.get(position);
-        holder.blogImage.setImageResource(blog.getImage());
-        holder.blogName.setText(blog.getName());
+
+        holder.blogName.setText(blog.getTieuDeBV());
+
+        Glide.with(context).load(blog.getAnh()).into(holder.blogImage);
+
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailBlogActivity.class);
-                intent.putExtra("Image", blogList.get(holder.getAdapterPosition()).getImage());
-                intent.putExtra("Title", blogList.get(holder.getAdapterPosition()).getName());
-                intent.putExtra("Desc", blogList.get(holder.getAdapterPosition()).getDesc());
+                intent.putExtra("Image", blogList.get(holder.getAdapterPosition()).getAnh());
+                intent.putExtra("Title", blogList.get(holder.getAdapterPosition()).getTieuDeBV());
+                intent.putExtra("Desc", blogList.get(holder.getAdapterPosition()).getNoiDung());
                 System.out.println(intent);
                 System.out.println(context);
                 context.startActivity(intent);

@@ -1,137 +1,159 @@
 package com.example.applestore.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.text.NumberFormat;
-public class Product {
-    private int id;
-    private  int id_category;
-    private String name;
-    private int price;
+import java.util.List;
 
-    public int getId_category() {
-        return id_category;
+public class Product implements Serializable {
+    @SerializedName("MaSP")
+    int MaSP;
+    @SerializedName("danhMuc")
+    private Category danhMuc;
+    @SerializedName("tenSP")
+    String TenSP;
+    @SerializedName("MoTa")
+    String MoTa;
+    @SerializedName("GiaGoc")
+    int GiaGoc;
+    @SerializedName("GiaBanThuong")
+    int GiaBanThuong;
+    @SerializedName("GiaKhuyenMai")
+    int GiaKhuyenMai;
+    @SerializedName("SoLuong")
+    int SoLuong;
+    @SerializedName("Anh")
+    String Anh;
+    @SerializedName("MoTaNgan")
+    String MoTaNgan;
+    @SerializedName("isDeteted")
+    int isDeteted;
+    @SerializedName("ListAnhSanPham")
+    private List<ProductPicture> ListAnhSanPham;
+    @SerializedName("ListCTDH")
+    private  List<OrderDetail> ListCTDH;
+
+    public Product() {
     }
 
-    public void setId_category(int id_category) {
-        this.id_category = id_category;
+    public Product(int maSP, Category danhMuc, String tenSP, String moTa, int giaGoc, int giaBanThuong, int giaKhuyenMai, int soLuong, String anh, String moTaNgan, int isDeteted, List<ProductPicture> listAnhSanPham, List<OrderDetail> listCTDH) {
+        MaSP = maSP;
+        this.danhMuc = danhMuc;
+        TenSP = tenSP;
+        MoTa = moTa;
+        GiaGoc = giaGoc;
+        GiaBanThuong = giaBanThuong;
+        GiaKhuyenMai = giaKhuyenMai;
+        SoLuong = soLuong;
+        Anh = anh;
+        MoTaNgan = moTaNgan;
+        this.isDeteted = isDeteted;
+        ListAnhSanPham = listAnhSanPham;
+        ListCTDH = listCTDH;
     }
 
-    public int getPrice() {
-        return price;
+    public int getMaSP() {
+        return MaSP;
     }
 
-    public int getInit_price() {
-        return init_price;
+    public void setMaSP(int maSP) {
+        MaSP = maSP;
     }
 
-    public void setInit_price(int init_price) {
-        this.init_price = init_price;
+    public Category getDanhMuc() {
+        return danhMuc;
     }
 
-    public int getSale_price() {
-        return sale_price;
+    public void setDanhMuc(Category danhMuc) {
+        this.danhMuc = danhMuc;
     }
 
-    public void setSale_price(int sale_price) {
-        this.sale_price = sale_price;
+    public String getTenSP() {
+        return TenSP;
     }
 
-    public String getDes_short() {
-        return des_short;
+    public void setTenSP(String tenSP) {
+        TenSP = tenSP;
     }
 
-    public void setDes_short(String des_short) {
-        this.des_short = des_short;
+    public String getMoTa() {
+        return MoTa;
     }
 
-    public int getIsdelete() {
-        return isdelete;
+    public void setMoTa(String moTa) {
+        MoTa = moTa;
     }
 
-    public void setIsdelete(int isdelete) {
-        this.isdelete = isdelete;
+    public int getGiaGoc() {
+        return GiaGoc;
     }
 
-    private  int init_price;
-    private int sale_price;
-
-    private static String image;
-
-    private int quantity;
-
-    private String des;
-
-    public Product(int id, int id_category, String name, int price, int init_price, int sale_price, String image, int quantity, String des, String des_short, int isdelete) {
-        this.id = id;
-        this.id_category = id_category;
-        this.name = name;
-        this.price = price;
-        this.init_price = init_price;
-        this.sale_price = sale_price;
-        this.image = image;
-        this.quantity = quantity;
-        this.des = des;
-        this.des_short = des_short;
-        this.isdelete = isdelete;
+    public void setGiaGoc(int giaGoc) {
+        GiaGoc = giaGoc;
     }
 
-    private  String des_short;
-    private  int isdelete;
-    private NumberFormat format = NumberFormat.getCurrencyInstance();
-
-    public Product(String image, String name, int price, int id, int quantity, String des) {
-        this.image = image;
-        this.name = name;
-        this.price = price;
-        this.id = id;
-        this.quantity = quantity;
-        this.des = des;
+    public int getGiaBanThuong() {
+        return GiaBanThuong;
     }
 
-    public static String getImage() {
-        return image;
+    public void setGiaBanThuong(int giaBanThuong) {
+        GiaBanThuong = giaBanThuong;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public int getGiaKhuyenMai() {
+        return GiaKhuyenMai;
     }
 
-    public String getName() {
-        return name;
+    public void setGiaKhuyenMai(int giaKhuyenMai) {
+        GiaKhuyenMai = giaKhuyenMai;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getSoLuong() {
+        return SoLuong;
     }
 
-    public String getPriceString() {
-        return format.format(price);
+    public void setSoLuong(int soLuong) {
+        SoLuong = soLuong;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public String getAnh() {
+        return Anh;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAnh(String anh) {
+        Anh = anh;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public String getMoTaNgan() {
+        return MoTaNgan;
     }
 
-    public void setDes(String des) {
-        this.des = des;
+    public void setMoTaNgan(String moTaNgan) {
+        MoTaNgan = moTaNgan;
     }
 
-    public int getId() {
-        return id;
+    public int getIsDeteted() {
+        return isDeteted;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setIsDeteted(int isDeteted) {
+        this.isDeteted = isDeteted;
     }
 
-    public String getDes() {
-        return des;
+    public List<ProductPicture> getListAnhSanPham() {
+        return ListAnhSanPham;
+    }
+
+    public void setListAnhSanPham(List<ProductPicture> listAnhSanPham) {
+        ListAnhSanPham = listAnhSanPham;
+    }
+
+    public List<OrderDetail> getListCTDH() {
+        return ListCTDH;
+    }
+
+    public void setListCTDH(List<OrderDetail> listCTDH) {
+        ListCTDH = listCTDH;
     }
 }

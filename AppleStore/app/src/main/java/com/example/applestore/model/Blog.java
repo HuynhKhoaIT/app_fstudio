@@ -1,40 +1,81 @@
 package com.example.applestore.model;
 
-public class Blog {
-    private int image;
-    private String name;
-    private String desc;
+import com.google.gson.annotations.SerializedName;
 
-    private int id_blog;
+import java.io.Serializable;
+import java.util.Date;
 
+public class Blog implements Serializable {
+    @SerializedName("maBV")
+    private int maBV;
+    @SerializedName("tieuDeBV")
+    private String tieuDeBV;
+    @SerializedName("noiDung")
+    private String noiDung;
+    @SerializedName("anh")
+    private String anh;
+    @SerializedName("ngayTao")
+    private Date ngayTao;
+    @SerializedName("ngayCapNhat")
+    private Date ngayCapNhat;
 
-    public Blog(int image, String name, String desc) {
-        this.image = image;
-        this.name = name;
-        this.desc = desc;
+    public Blog() {
     }
 
-
-
-    public int getImage() {
-        return image;
+    public Blog(int maBV, String tieuDeBV, String noiDung, String anh, Date ngayTao, Date ngayCapNhat) {
+        this.maBV = maBV;
+        this.tieuDeBV = tieuDeBV;
+        this.noiDung = noiDung;
+        this.anh = anh;
+        this.ngayTao = ngayTao;
+        this.ngayCapNhat = ngayCapNhat;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public int getMaBV() {
+        return maBV;
     }
 
-    public String getName() {
-        return name;
+    public void setMaBV(int maBV) {
+        this.maBV = maBV;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTieuDeBV() {
+        return tieuDeBV;
     }
 
-    public String getDesc() {
-        return desc;
+    public void setTieuDeBV(String tieuDeBV) {
+        this.tieuDeBV = tieuDeBV;
     }
 
-    public void setDesc(String desc) {this.desc = desc; }
+    public String getNoiDung() {
+        return noiDung;
+    }
+
+    public void setNoiDung(String noiDung) {
+        this.noiDung = noiDung;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public Date getNgayCapNhat() {
+        return ngayCapNhat;
+    }
+
+    public void setNgayCapNhat(Date ngayCapNhat) {
+        this.ngayCapNhat = ngayCapNhat;
+    }
 }

@@ -1,60 +1,71 @@
 package com.example.applestore.model;
 
-public class OrderDetail {
-    private int MaCTDH;
-    private int MaSP;
-    private int MaDH;
-    private int SoLuong;
-    private int TongTien;
+import com.google.gson.annotations.SerializedName;
 
-    public int getMaCTDH() {
-        return MaCTDH;
-    }
+import java.io.Serializable;
 
-    public void setMaCTDH(int maCTDH) {
-        MaCTDH = maCTDH;
-    }
+public class OrderDetail implements Serializable {
+    @SerializedName("maCTDH")
+    private int maCTDH;
+    @SerializedName("sanPham2")
+    private Product sanPham2;
+    @SerializedName("donHang")
+    private Order donHang;
+    @SerializedName("SoLuong")
+    int soLuong;
+    @SerializedName("TongTien")
+    int tongTien;
 
-    public int getMaSP() {
-        return MaSP;
-    }
-
-    public void setMaSP(int maSP) {
-        MaSP = maSP;
-    }
-
-    public int getMaDH() {
-        return MaDH;
-    }
-
-    public void setMaDH(int maDH) {
-        MaDH = maDH;
-    }
-
-    public int getSoLuong() {
-        return SoLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        SoLuong = soLuong;
-    }
-
-    public int getTongTien() {
-        return TongTien;
-    }
-
-    public void setTongTien(int tongTien) {
-        TongTien = tongTien;
-    }
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int maCTDH, int maSP, int maDH, int soLuong, int tongTien) {
-        MaCTDH = maCTDH;
-        MaSP = maSP;
-        MaDH = maDH;
-        SoLuong = soLuong;
-        TongTien = tongTien;
+    public OrderDetail(int maCTDH, Product sanPham2, Order donHang, int soLuong, int tongTien) {
+        this.maCTDH = maCTDH;
+        this.sanPham2 = sanPham2;
+        this.donHang = donHang;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+    }
+
+    public int getMaCTDH() {
+        return maCTDH;
+    }
+
+    public void setMaCTDH(int maCTDH) {
+        this.maCTDH = maCTDH;
+    }
+
+    public Product getSanPham2() {
+        return sanPham2;
+    }
+
+    public void setSanPham2(Product sanPham2) {
+        this.sanPham2 = sanPham2;
+    }
+
+    public Order getDonHang() {
+        return donHang;
+    }
+
+    public void setDonHang(Order donHang) {
+        this.donHang = donHang;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
     }
 }
+

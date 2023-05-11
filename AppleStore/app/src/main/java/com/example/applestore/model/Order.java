@@ -1,72 +1,94 @@
 package com.example.applestore.model;
 
-import java.util.Date;
+import com.google.gson.annotations.SerializedName;
 
-public class Order {
-    private  int MaDH;
-    private int TongTien;
-    private String DiaChi;
-    private Date NgayDatHang;
-    private int MaKH;
-    private int MaTrangThai;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+public class Order implements Serializable {
+    @SerializedName("maDH")
+    int maDH;
+    @SerializedName("tongTien")
+    int tongTien;
+    @SerializedName("diaChi")
+    String diaChi;
+    @SerializedName("ngayDatHang")
+    Date ngayDatHang;
+    @SerializedName("listChiTietDonHang")
+    private List<OrderDetail> listChiTietDonHang;
+    @SerializedName("trangThai")
+    private OrderStatus trangThai;
+    @SerializedName("khachHang")
+    private User khachHang;
+
 
     public Order() {
     }
 
-    public Order(int maDH, int tongTien, String diaChi, Date ngayDatHang, int maKH, int maTrangThai) {
-        MaDH = maDH;
-        TongTien = tongTien;
-        DiaChi = diaChi;
-        NgayDatHang = ngayDatHang;
-        MaKH = maKH;
-        MaTrangThai = maTrangThai;
+    public Order(int maDH, int tongTien, String diaChi, Date ngayDatHang, List<OrderDetail> listChiTietDonHang, OrderStatus trangThai, User khachHang) {
+        this.maDH = maDH;
+        this.tongTien = tongTien;
+        this.diaChi = diaChi;
+        this.ngayDatHang = ngayDatHang;
+        this.listChiTietDonHang = listChiTietDonHang;
+        this.trangThai = trangThai;
+        this.khachHang = khachHang;
     }
 
     public int getMaDH() {
-        return MaDH;
+        return maDH;
     }
 
     public void setMaDH(int maDH) {
-        MaDH = maDH;
+        this.maDH = maDH;
     }
 
     public int getTongTien() {
-        return TongTien;
+        return tongTien;
     }
 
     public void setTongTien(int tongTien) {
-        TongTien = tongTien;
+        this.tongTien = tongTien;
     }
 
     public String getDiaChi() {
-        return DiaChi;
+        return diaChi;
     }
 
     public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
+        this.diaChi = diaChi;
     }
 
     public Date getNgayDatHang() {
-        return NgayDatHang;
+        return ngayDatHang;
     }
 
     public void setNgayDatHang(Date ngayDatHang) {
-        NgayDatHang = ngayDatHang;
+        this.ngayDatHang = ngayDatHang;
     }
 
-    public int getMaKH() {
-        return MaKH;
+    public List<OrderDetail> getListChiTietDonHang() {
+        return listChiTietDonHang;
     }
 
-    public void setMaKH(int maKH) {
-        MaKH = maKH;
+    public void setListChiTietDonHang(List<OrderDetail> listChiTietDonHang) {
+        this.listChiTietDonHang = listChiTietDonHang;
     }
 
-    public int getMaTrangThai() {
-        return MaTrangThai;
+    public OrderStatus getTrangThai() {
+        return trangThai;
     }
 
-    public void setMaTrangThai(int maTrangThai) {
-        MaTrangThai = maTrangThai;
+    public void setTrangThai(OrderStatus trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public User getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(User khachHang) {
+        this.khachHang = khachHang;
     }
 }
