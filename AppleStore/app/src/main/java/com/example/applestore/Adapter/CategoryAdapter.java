@@ -10,16 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.applestore.R;
 import com.example.applestore.model.Category;
+import com.example.applestore.model.Product;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewholder> {
-
+    private Context context;
     List<Category> array;
 
-    public CategoryAdapter(List<Category> array) {
+    public CategoryAdapter(Context applicationContext, List<Category> array) {
+        this.context = applicationContext;
+
         this.array = array;
     }
 
@@ -36,7 +40,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyViewholder holder, int position) {
         Category category = array.get(position);
-        holder.category_image.setImageResource(category.getImgCategory());
+        //holder.category_image.setImageResource();
+        Glide.with(context).load(Category.getImgCategory()).into(holder.category_image);
         holder.category_name.setText(category.getNameCategory());
     }
 

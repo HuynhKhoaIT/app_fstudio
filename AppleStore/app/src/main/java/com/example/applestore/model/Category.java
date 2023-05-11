@@ -2,10 +2,20 @@ package com.example.applestore.model;
 
 public class Category {
     private int idCategory;
-    private int imgCategory;
+
+    public int getIdloaisanpham() {
+        return idloaisanpham;
+    }
+
+    public void setIdloaisanpham(int idloaisanpham) {
+        this.idloaisanpham = idloaisanpham;
+    }
+
+    private  int idloaisanpham;
+    private static String imgCategory;
     private String nameCategory;
 
-    public Category(int idCategory, int imgCategory, String nameCategory) {
+    public Category(int idCategory, String imgCategory, String nameCategory) {
         this.idCategory = idCategory;
         this.imgCategory = imgCategory;
         this.nameCategory = nameCategory;
@@ -15,7 +25,7 @@ public class Category {
         this.idCategory = idCategory;
     }
 
-    public void setImgCategory(int imgCategory) {
+    public void setImgCategory(String imgCategory) {
         this.imgCategory = imgCategory;
     }
 
@@ -27,7 +37,7 @@ public class Category {
         return idCategory;
     }
 
-    public int getImgCategory() {
+    public static String getImgCategory() {
         return imgCategory;
     }
 

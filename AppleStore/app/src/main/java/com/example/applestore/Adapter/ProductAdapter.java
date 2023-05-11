@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.applestore.Activity.DetailBlogActivity;
 import com.example.applestore.Activity.DetailProductActivity;
 import com.example.applestore.R;
+import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 
 import java.util.List;
@@ -43,7 +45,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Product product = mProductList.get(position);
         holder.productName.setText(product.getName());
         holder.productPrice.setText(product.getPriceString());
-        holder.productImage.setImageResource(product.getImage());
+        //holder.productImage.setImageResource(product.getImage());
+        Glide.with(context).load(Product.getImage()).into(holder.productImage);
 
         holder.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
