@@ -31,13 +31,7 @@ public class BlogFragment extends Fragment {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
         List<Blog> blogList = new ArrayList<>();
-        Blog blog1 = new Blog(R.drawable.blog2, "Iphone","mô tả chi tiết tại đây nha mọi người!");
-        Blog blog2 = new Blog(R.drawable.blog3, "Iphone 14","mô tả chi tiết tại đây nha mọi người!");
-        Blog blog3 = new Blog(R.drawable.mac, "Macbook","mô tả chi tiết tại đây nha mọi người!");
 
-        blogList.add(blog1);
-        blogList.add(blog2);
-        blogList.add(blog3);
 //        BlogAdapter adapter = new BlogAdapter(context, blogList);
         adapter = new BlogAdapter(getActivity(), blogList);
         mRecyclerView.setAdapter(adapter);

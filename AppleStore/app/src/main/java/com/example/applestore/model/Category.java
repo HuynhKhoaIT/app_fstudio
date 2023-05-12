@@ -1,47 +1,59 @@
 package com.example.applestore.model;
 
-public class Category {
-    private int idCategory;
+import com.google.gson.annotations.SerializedName;
 
-    public int getIdloaisanpham() {
-        return idloaisanpham;
+import java.io.Serializable;
+import java.util.List;
+
+public class Category implements Serializable {
+    @SerializedName("maDM")
+    int maDM;
+    @SerializedName("tenDM")
+    String tenDM;
+    @SerializedName("anhdm")
+    String anhdm;
+    @SerializedName("listSanPham")
+    private List<Product> listSanPham;
+
+    public Category() {
     }
 
-    public void setIdloaisanpham(int idloaisanpham) {
-        this.idloaisanpham = idloaisanpham;
+    public Category(int maDM, String tenDM, String anhdm, List<Product> listSanPham) {
+        this.maDM = maDM;
+        this.tenDM = tenDM;
+        this.anhdm = anhdm;
+        this.listSanPham = listSanPham;
     }
 
-    private  int idloaisanpham;
-    private static String imgCategory;
-    private String nameCategory;
-
-    public Category(int idCategory, String imgCategory, String nameCategory) {
-        this.idCategory = idCategory;
-        this.imgCategory = imgCategory;
-        this.nameCategory = nameCategory;
+    public int getMaDM() {
+        return maDM;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setMaDM(int maDM) {
+        this.maDM = maDM;
     }
 
-    public void setImgCategory(String imgCategory) {
-        this.imgCategory = imgCategory;
+    public String getTenDM() {
+        return tenDM;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public void setTenDM(String tenDM) {
+        this.tenDM = tenDM;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public String getAnhdm() {
+        return anhdm;
     }
 
-    public static String getImgCategory() {
-        return imgCategory;
+    public void setAnhdm(String anhdm) {
+        this.anhdm = anhdm;
     }
 
-    public String getNameCategory() {
-        return nameCategory;
+    public List<Product> getListSanPham() {
+        return listSanPham;
+    }
+
+    public void setListSanPham(List<Product> listSanPham) {
+        this.listSanPham = listSanPham;
     }
 }

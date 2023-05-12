@@ -1,40 +1,59 @@
 package com.example.applestore.model;
 
-public class Cart {
-    private int MaGH;
-    private int MaKH;
-    private int IsDelete;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Cart implements Serializable {
+    @SerializedName("maGH")
+    int maGH;
+    @SerializedName("khachHang")
+    private User khachHang;
+    @SerializedName("chiTietGioHangs")
+    private List<CartDetail> chiTietGioHangs;
+    @SerializedName("isDelete")
+    int isDelete;
 
     public Cart() {
     }
 
-    public Cart(int maGH, int maKH, int isDelete) {
-        MaGH = maGH;
-        MaKH = maKH;
-        IsDelete = isDelete;
+    public Cart(int maGH, User khachHang, List<CartDetail> chiTietGioHangs, int isDelete) {
+        this.maGH = maGH;
+        this.khachHang = khachHang;
+        this.chiTietGioHangs = chiTietGioHangs;
+        this.isDelete = isDelete;
     }
 
     public int getMaGH() {
-        return MaGH;
+        return maGH;
     }
 
     public void setMaGH(int maGH) {
-        MaGH = maGH;
+        this.maGH = maGH;
     }
 
-    public int getMaKH() {
-        return MaKH;
+    public User getKhachHang() {
+        return khachHang;
     }
 
-    public void setMaKH(int maKH) {
-        MaKH = maKH;
+    public void setKhachHang(User khachHang) {
+        this.khachHang = khachHang;
+    }
+
+    public List<CartDetail> getChiTietGioHangs() {
+        return chiTietGioHangs;
+    }
+
+    public void setChiTietGioHangs(List<CartDetail> chiTietGioHangs) {
+        this.chiTietGioHangs = chiTietGioHangs;
     }
 
     public int getIsDelete() {
-        return IsDelete;
+        return isDelete;
     }
 
     public void setIsDelete(int isDelete) {
-        IsDelete = isDelete;
+        this.isDelete = isDelete;
     }
 }

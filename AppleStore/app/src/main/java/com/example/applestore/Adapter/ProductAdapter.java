@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.applestore.Activity.DetailBlogActivity;
 import com.example.applestore.Activity.DetailProductActivity;
 import com.example.applestore.R;
+import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 
@@ -43,20 +44,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = mProductList.get(position);
-        holder.productName.setText(product.getName());
-        holder.productPrice.setText(product.getPriceString());
-        //holder.productImage.setImageResource(product.getImage());
-        Glide.with(context).load(Product.getImage()).into(holder.productImage);
+        holder.productName.setText(product.getTenSP());
+        holder.productPrice.setText(CurrencyFormatter.formatCurrency(product.getGiaBanThuong()));
+
+        Glide.with(context).load(product.getAnh()).into(holder.productImage);
 
         holder.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailProductActivity.class);
 
-                intent.putExtra("Image", mProductList.get(holder.getAdapterPosition()).getImage());
-                intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getName());
-                intent.putExtra("Price", mProductList.get(holder.getAdapterPosition()).getPriceString());
-                intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getDes());
+                intent.putExtra("Image", mProductList.get(holder.getAdapterPosition()).getAnh());
+                intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getTenSP());
+                intent.putExtra("Price", CurrencyFormatter.formatCurrency(mProductList.get(holder.getAdapterPosition()).getGiaBanThuong()));
+                intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getMoTa());
                 context.startActivity(intent);
             }
         });
