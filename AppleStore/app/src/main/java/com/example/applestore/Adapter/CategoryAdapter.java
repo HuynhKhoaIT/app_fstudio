@@ -45,13 +45,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyViewholder holder, int position) {
         Category category = array.get(position);
-        //holder.category_image.setImageResource();
         Glide.with(context).load(category.getAnhdm()).into(holder.category_image);
         holder.category_name.setText(category.getTenDM());
     }
-//    public class MyViewholder extends RecyclerView.ViewHolder{
-//
-//    }
+
 
 
     @Override
@@ -62,13 +59,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public static class MyViewholder extends RecyclerView.ViewHolder {
         public ImageView category_image;
         public TextView category_name;
-        //        public TextView id;
         public MyViewholder(@NonNull View itemView) {
             super(itemView);
 
             category_image = (ImageView) itemView.findViewById(R.id.category_image);
             category_name = (TextView) itemView.findViewById(R.id.category_name);
-//            id = (TextView) itemView.findViewById(R.id.tvIdCate);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

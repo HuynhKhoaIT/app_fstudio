@@ -62,17 +62,21 @@ public class HomeFragment extends Fragment {
 
 
         //        list Category
-//         List<Category> categories = new ArrayList<>();
-//         Category category1 = new Category(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Iphone");
-//         Category category2 = new Category(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Iphone");
-//         Category category3 = new Category(3, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "MAC");
-//         Category category4 = new Category(4, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Watch");
-//         Category category5 = new Category (5, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Other");
+         List<Category> categories = new ArrayList<>();
+         Category category1 = new Category(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Iphone");
+         Category category2 = new Category(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Iphone");
+         Category category3 = new Category(3, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "MAC");
+         Category category4 = new Category(4, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Watch");
+         Category category5 = new Category (5, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Other");
 
-
-//        categories = new ArrayList<>();
-//        categoryAdapter = new CategoryAdapter(getActivity(),categories);
-//        categoryRec.setAdapter(categoryAdapter);
+        categories = new ArrayList<>();
+        categories.add(category1);
+        categories.add(category2);
+        categories.add(category3);
+        categories.add(category4);
+        categories.add(category5);
+        categoryAdapter = new CategoryAdapter(getActivity(),categories);
+        categoryRec.setAdapter(categoryAdapter);
 
 //List product
         getProduct();

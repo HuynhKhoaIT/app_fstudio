@@ -25,6 +25,12 @@ public class Category implements Serializable {
         this.listSanPham = listSanPham;
     }
 
+    public Category(int maDM, String anhdm, String tenDM) {
+        this.maDM = maDM;
+        this.anhdm = anhdm;
+        this.tenDM = tenDM;
+    }
+
     public int getMaDM() {
         return maDM;
     }
