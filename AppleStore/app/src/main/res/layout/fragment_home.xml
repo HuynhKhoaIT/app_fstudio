@@ -65,12 +65,12 @@
         <!--Danh mục-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoryList"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
-                tools:itemCount="3"
-                tools:layoutManager="GridLayoutManager"
-                tools:spanCount="3" />
+
+                tools:listitem="@layout/recycler_view_item"
+                android:scrollbars="horizontal" />
 
             <!--            Sản phẩm nổi bật-->
             <LinearLayout
