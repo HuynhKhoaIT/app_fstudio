@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -35,15 +36,14 @@ public class HomeFragment extends Fragment {
     private ImageSlider imageSlider;
     private RecyclerView mRecyclerView,categoryRec;
 
+
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
     ProductAdapter productAdapter;
     List<Category> categories;
     List<Product> productList;
     CategoryAdapter categoryAdapter;
-
-    Context context;
-
+    private Context context;
     public HomeFragment() {}
 
     @Override
@@ -53,7 +53,21 @@ public class HomeFragment extends Fragment {
         imageSlider = view.findViewById(R.id.imageSlide);
         categoryRec = view.findViewById(R.id.categoryList);
         mRecyclerView = view.findViewById(R.id.product_list);
+        context = getActivity();
 
+
+
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        categoryRec.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
+
+        //        list Category
+//         List<Category> categories = new ArrayList<>();
+//         Category category1 = new Category(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Iphone");
+//         Category category2 = new Category(2, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Iphone");
+//         Category category3 = new Category(3, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "MAC");
+//         Category category4 = new Category(4, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Watch");
+//         Category category5 = new Category (5, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3jwzqK0H_OwoQOTp6QyfwHkNWLOJ0Uh7xHrIfpnhf&s", "Other");
 
 
 //        categories = new ArrayList<>();
