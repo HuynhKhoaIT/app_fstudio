@@ -87,8 +87,9 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccessful()){
                     System.out.println(response.body().toString());
                     productList = response.body();
+                    System.out.println(response.body());
                     System.out.println("Zoo");
-                    System.out.println(productList.get(0).getTenSP());
+                    System.out.println(productList.get(0).getAnh());
                     productAdapter = new ProductAdapter(getContext(),productList);
                     mRecyclerView.setHasFixedSize(true);
                     mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
@@ -100,7 +101,6 @@ public class HomeFragment extends Fragment {
                     System.out.println("Zoo - Errors");
                 }
             }
-
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Log.i("TAG", t.toString());

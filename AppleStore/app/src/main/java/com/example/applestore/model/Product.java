@@ -7,58 +7,58 @@ import java.text.NumberFormat;
 import java.util.List;
 
 public class Product implements Serializable {
-    @SerializedName("MaSP")
-    int MaSP;
+    @SerializedName("maSP")
+    int maSP;
     @SerializedName("danhMuc")
     private Category danhMuc;
     @SerializedName("tenSP")
-    String TenSP;
-    @SerializedName("MoTa")
-    String MoTa;
-    @SerializedName("GiaGoc")
-    int GiaGoc;
-    @SerializedName("GiaBanThuong")
-    int GiaBanThuong;
-    @SerializedName("GiaKhuyenMai")
-    int GiaKhuyenMai;
-    @SerializedName("SoLuong")
-    int SoLuong;
-    @SerializedName("Anh")
-    String Anh;
-    @SerializedName("MoTaNgan")
-    String MoTaNgan;
+    String tenSP;
+    @SerializedName("moTa")
+    String moTa;
+    @SerializedName("giaGoc")
+    int giaGoc;
+    @SerializedName("giaBanThuong")
+    int giaBanThuong;
+    @SerializedName("giaKhuyenMai")
+    int giaKhuyenMai;
+    @SerializedName("soLuong")
+    int soLuong;
+    @SerializedName("anh")
+    String anh;
+    @SerializedName("moTaNgan")
+    String moTaNgan;
     @SerializedName("isDeteted")
     int isDeteted;
-    @SerializedName("ListAnhSanPham")
-    private List<ProductPicture> ListAnhSanPham;
-    @SerializedName("ListCTDH")
-    private  List<OrderDetail> ListCTDH;
+    @SerializedName("listAnhSanPham")
+    private List<ProductPicture> listAnhSanPham;
+    @SerializedName("listCTDH")
+    private  List<OrderDetail> listCTDH;
 
     public Product() {
     }
 
     public Product(int maSP, Category danhMuc, String tenSP, String moTa, int giaGoc, int giaBanThuong, int giaKhuyenMai, int soLuong, String anh, String moTaNgan, int isDeteted, List<ProductPicture> listAnhSanPham, List<OrderDetail> listCTDH) {
-        MaSP = maSP;
+        this.maSP = maSP;
         this.danhMuc = danhMuc;
-        TenSP = tenSP;
-        MoTa = moTa;
-        GiaGoc = giaGoc;
-        GiaBanThuong = giaBanThuong;
-        GiaKhuyenMai = giaKhuyenMai;
-        SoLuong = soLuong;
-        Anh = anh;
-        MoTaNgan = moTaNgan;
+        this.tenSP = tenSP;
+        this.moTa = moTa;
+        this.giaGoc = giaGoc;
+        this.giaBanThuong = giaBanThuong;
+        this.giaKhuyenMai = giaKhuyenMai;
+        this.soLuong = soLuong;
+        this.anh = anh;
+        this.moTaNgan = moTaNgan;
         this.isDeteted = isDeteted;
-        ListAnhSanPham = listAnhSanPham;
-        ListCTDH = listCTDH;
+        this.listAnhSanPham = listAnhSanPham;
+        this.listCTDH = listCTDH;
     }
 
     public int getMaSP() {
-        return MaSP;
+        return maSP;
     }
 
     public void setMaSP(int maSP) {
-        MaSP = maSP;
+        this.maSP = maSP;
     }
 
     public Category getDanhMuc() {
@@ -70,67 +70,67 @@ public class Product implements Serializable {
     }
 
     public String getTenSP() {
-        return TenSP;
+        return tenSP;
     }
 
     public void setTenSP(String tenSP) {
-        TenSP = tenSP;
+        this.tenSP = tenSP;
     }
 
     public String getMoTa() {
-        return MoTa;
+        return moTa;
     }
 
     public void setMoTa(String moTa) {
-        MoTa = moTa;
+        this.moTa = moTa;
     }
 
     public int getGiaGoc() {
-        return GiaGoc;
+        return giaGoc;
     }
 
     public void setGiaGoc(int giaGoc) {
-        GiaGoc = giaGoc;
+        this.giaGoc = giaGoc;
     }
 
     public int getGiaBanThuong() {
-        return GiaBanThuong;
+        return giaBanThuong;
     }
 
     public void setGiaBanThuong(int giaBanThuong) {
-        GiaBanThuong = giaBanThuong;
+        this.giaBanThuong = giaBanThuong;
     }
 
     public int getGiaKhuyenMai() {
-        return GiaKhuyenMai;
+        return giaKhuyenMai;
     }
 
     public void setGiaKhuyenMai(int giaKhuyenMai) {
-        GiaKhuyenMai = giaKhuyenMai;
+        this.giaKhuyenMai = giaKhuyenMai;
     }
 
     public int getSoLuong() {
-        return SoLuong;
+        return soLuong;
     }
 
     public void setSoLuong(int soLuong) {
-        SoLuong = soLuong;
+        this.soLuong = soLuong;
     }
 
     public String getAnh() {
-        return Anh;
+        return anh;
     }
 
     public void setAnh(String anh) {
-        Anh = anh;
+        this.anh = anh;
     }
 
     public String getMoTaNgan() {
-        return MoTaNgan;
+        return moTaNgan;
     }
 
     public void setMoTaNgan(String moTaNgan) {
-        MoTaNgan = moTaNgan;
+        this.moTaNgan = moTaNgan;
     }
 
     public int getIsDeteted() {
@@ -142,18 +142,18 @@ public class Product implements Serializable {
     }
 
     public List<ProductPicture> getListAnhSanPham() {
-        return ListAnhSanPham;
+        return listAnhSanPham;
     }
 
     public void setListAnhSanPham(List<ProductPicture> listAnhSanPham) {
-        ListAnhSanPham = listAnhSanPham;
+        this.listAnhSanPham = listAnhSanPham;
     }
 
     public List<OrderDetail> getListCTDH() {
-        return ListCTDH;
+        return listCTDH;
     }
 
     public void setListCTDH(List<OrderDetail> listCTDH) {
-        ListCTDH = listCTDH;
+        this.listCTDH = listCTDH;
     }
 }

@@ -11,9 +11,9 @@ public class OrderDetail implements Serializable {
     private Product sanPham2;
     @SerializedName("donHang")
     private Order donHang;
-    @SerializedName("SoLuong")
+    @SerializedName("soLuong")
     int soLuong;
-    @SerializedName("TongTien")
+    @SerializedName("tongTien")
     int tongTien;
 
 
