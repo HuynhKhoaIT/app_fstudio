@@ -35,6 +35,17 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String tenKH, String tenTK, String email, String phone, String diaChi, String mK, int isUser, int isAdmin){
+        this.tenKH = tenKH;
+        this.tenTK = tenTK;
+        this.email = email;
+        this.phone = phone;
+        this.diaChi = diaChi;
+        this.mK = mK;
+        this.isUser = isUser;
+        this.isAdmin = isAdmin;
+    }
+
     public User(int maKH, String tenKH, String tenTK, String email, String phone, String diaChi, String mK, int isUser, int isAdmin, List<Order> listDonHang, Cart gioHang) {
         this.maKH = maKH;
         this.tenKH = tenKH;
@@ -48,6 +59,8 @@ public class User implements Serializable {
         this.listDonHang = listDonHang;
         this.gioHang = gioHang;
     }
+
+
 
     public int getMaKH() {
         return maKH;

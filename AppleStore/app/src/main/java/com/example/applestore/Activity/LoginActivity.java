@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.developer.gbuttons.GoogleSignInButton;
+import com.example.applestore.APIService.APIService;
+import com.example.applestore.Adapter.CategoryAdapter;
 import com.example.applestore.R;
+import com.example.applestore.Retrofit.RetrofitClient;
+import com.example.applestore.model.Category;
+import com.example.applestore.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,11 +36,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText loginEmail, loginPassword;
     private TextView signupRedirecText;
     private Button loginButton;
+
+    APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
     GoogleSignInButton googleBtn;
     GoogleSignInOptions gOptions;
@@ -105,28 +119,31 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn(String email, String pass) {
         if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             if(!pass.isEmpty()){
-                auth.signInWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Đăng nhập thành công
-                                    // Chuyển sang màn hình chính
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    // Đăng nhập thất bại
-                                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                // Firebase
+//                auth.signInWithEmailAndPassword(email, pass)
+//                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<AuthResult> task) {
+//                                if (task.isSuccessful()) {
+//                                    // Đăng nhập thành công
+//                                    // Chuyển sang màn hình chính
+//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                } else {
+//                                    // Đăng nhập thất bại
+//                                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",
+//                                            Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+                //Database
+                signInWithDB(email,pass);
             }else{
                 loginPassword.setError("password cannot be empty");
             }
@@ -135,5 +152,32 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             loginEmail.setError("Please enter valid email");
         }
+    }
+    private void signInWithDB(String email,String pass){
+        Call<User> call = apiService.loginUser(email,pass);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(response.isSuccessful()){
+                    User user = response.body();
+                    if(user!=null)
+                    {
+                        Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }else{
+                    Log.i("TAG","fail");
+                    System.out.println("Zoo - Errors");
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("TAG", t.toString());
+                System.out.println("Zoo - Errors");
+            }
+        });
     }
 }
