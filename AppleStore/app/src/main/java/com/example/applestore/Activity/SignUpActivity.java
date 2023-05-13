@@ -3,6 +3,7 @@ package com.example.applestore.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +17,9 @@ import com.example.applestore.APIService.APIService;
 import com.example.applestore.Adapter.CategoryAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
+import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.model.User;
+import com.google.android.gms.common.internal.ConnectionTelemetryConfiguration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,9 +32,10 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private EditText signupEmail, signupPassword;
+    private EditText signupEmail, signupPassword, signupCusName, signupPhone,signupAddress;
     private Button signupButton;
     private TextView loginRedirecText;
+    private Context context = this;
 
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
@@ -40,9 +44,17 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
+
+        // ánh xạ
         auth = FirebaseAuth.getInstance();
+
         signupEmail = findViewById(R.id.signup_email);
         signupPassword = findViewById(R.id.signup_password);
+        signupCusName = findViewById(R.id.signup_cusName);
+        signupPhone = findViewById(R.id.signup_phone);
+        signupAddress = findViewById(R.id.signup_address);
+
         signupButton = findViewById(R.id.signup_button);
         loginRedirecText = findViewById(R.id.loginRedirectText);
 
@@ -50,10 +62,15 @@ public class SignUpActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = signupEmail.getText().toString().trim();
-                String pass = signupPassword.getText().toString().trim();
 
-                if(user.isEmpty()){
+                //getValue
+                String name = signupCusName.getText().toString();
+                String email = signupEmail.getText().toString().trim();
+                String pass = signupPassword.getText().toString().trim();
+                String phone= signupPhone.getText().toString();
+                String address = signupAddress.getText().toString();
+
+                if(email.isEmpty()){
                     signupEmail.setError("Email cannot be empty");
                 }
                 if(pass.isEmpty()){
@@ -72,13 +89,15 @@ public class SignUpActivity extends AppCompatActivity {
 //                        }
 //                    });
 
+                    User user = new User(name,email,phone,address,pass,1,0);
                     //Database
-                    Call<User> call = apiService.createUser(new User("a","a","a","a","a","a",1,1));
+                    Call<User> call = apiService.createUser(user);
                     call.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()){
-                                   Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
+
                             }else{
                                 Toast.makeText(SignUpActivity.this,"Đăng ký thất bại",Toast.LENGTH_LONG).show();
                                 Log.i("TAG","fail");
@@ -96,7 +115,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
         loginRedirecText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,4 +122,5 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
 }

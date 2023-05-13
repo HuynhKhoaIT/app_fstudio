@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.example.applestore.APIService.APIService;
 import com.example.applestore.Adapter.CategoryAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
+import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -48,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView signupRedirecText;
     private Button loginButton;
 
+    private Context context = this;
+
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
     GoogleSignInButton googleBtn;
@@ -57,6 +61,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Đã đăng nhập
+        if(SharedPrefManager.getInstance(context).isLoggedIn()){
+            finish();
+            startActivity(new Intent(context, MainActivity.class));
+        }
+
         auth = FirebaseAuth.getInstance();
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
@@ -163,6 +174,17 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     if(user!=null)
                     {
+                        // Lưu thông tin đăng nhập
+                        SharedPrefManager.getInstance(context).userLogin(new User(
+                                user.getMaKH(),
+                                user.getTenKH(),
+                                user.getEmail(),
+                                user.getPhone(),
+                                user.getDiaChi(),
+                                user.getmK(),
+                                user.getIsUser(),
+                                user.getIsAdmin()
+                        ));
                         Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);

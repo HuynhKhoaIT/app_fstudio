@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.applestore.Activity.LoginActivity;
 import com.example.applestore.R;
+import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -25,8 +26,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AccountFragment extends Fragment {
     TextView userName;
     Button logout;
+
+
     GoogleSignInClient gClient;
     GoogleSignInOptions gOptions;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +57,8 @@ public class AccountFragment extends Fragment {
                         startActivity(new Intent(getActivity(), LoginActivity.class)); //Chuyển đến màn hình đăng nhập
                     }
                 });
+                //Dang xuat database
+                SharedPrefManager.getInstance(getContext()).logout();
             }
         });
         return view;
