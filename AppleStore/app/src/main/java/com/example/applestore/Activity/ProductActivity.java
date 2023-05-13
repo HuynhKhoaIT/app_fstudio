@@ -18,6 +18,7 @@ import com.example.applestore.Adapter.ProductAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.model.Product;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,6 +35,7 @@ public class ProductActivity extends AppCompatActivity {
     //view
     int id;
     RecyclerView recProduct;
+    ProductAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,78 +43,39 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         getData();
         recProduct = findViewById(R.id.product_list);
+        recProduct.setLayoutManager(new GridLayoutManager(context, 2));
+        getProducts();
     }
-
     private void getData() {
         Intent intent = getIntent();
-        id = getIntent().getIntExtra(CategoryAdapter.KEY_CATEGORYID_TO_PRODUCT, 0);
+        id = 1 + getIntent().getIntExtra(CategoryAdapter.KEY_CATEGORYID_TO_PRODUCT, 0);
     }
-//    private void getProducts(){
-//
-//        Call<List<Product>> call = apiService.getProduct(id);
-//        call.enqueue(new Callback<List<Product>>() {
-//                         @Override
-//                         public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-//
-//                             if (response.isSuccessful()) {
-//                                 productList = response.body();
-//
-//                                 ProductAdapter productAdapter = new ProductAdapter(context, R.layout.row_item_product, productList);
-//
-//                                 gvProduct.setAdapter(productAdapter);
-//
-//                                 gvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                                     @Override
-//                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                                         Intent intent = new Intent(context, ProductDetailActivity.class);
-//                                         intent.putExtra(KEY_PRODUCT_ID_TO_PRODUCT_DETAIL, position);
-//                                         startActivity(intent);
-//                                     }
-//                                 });
-//
-//                             }
-//                             else {
-//                                 Toast.makeText(ProductActivity.this, "fail", Toast.LENGTH_LONG).show();
-//                             }
-//}
-//
-////
-////            }
-////
-////            @Override
-////            public void onFailure(Call<List<Product>> call, Throwable t) {
-////                Log.i("fail ", t.getMessage());
-////            }
-////        });
-////}
-////    private void getProducts(){
-////        Call<List<Product>> call = apiService.getAllProduct();
-////        call.enqueue(new Callback<List<Product>>() {
-////            @Override
-////            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-////
-////                if(response.isSuccessful()){
-////                    System.out.println(response.body().toString());
-////                    productList = response.body();
-////                    System.out.println(response.body());
-////                    System.out.println("Zoo");
-////                    System.out.println(productList.get(0).getAnh());
-////                    productAdapter = new ProductAdapter(getContext(),productList);
-////                    mRecyclerView.setHasFixedSize(true);
-////                    mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-////                    mRecyclerView.setAdapter(productAdapter);
-////                    productAdapter.notifyDataSetChanged();
-////
-////                }else{
-////                    Log.i("TAG","fail");
-////                    System.out.println("Zoo - Errors");
-////                }
-////            }
-////            @Override
-////            public void onFailure(Call<List<Product>> call, Throwable t) {
-////                Log.i("TAG", t.toString());
-////                System.out.println("Zoo - Errors");
-////            }
-////        });
-////    }
+    private void getProducts() {
+        Call<List<Product>> call = apiService.getSanPhamByDanhMuc(id);
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+
+                if (response.isSuccessful()) {
+                    System.out.println(response.body().toString());
+                    productList = response.body();
+                    System.out.println(response.body());
+                    System.out.println("Zoo");
+                    System.out.println(productList.get(0).getAnh());
+                    productAdapter = new ProductAdapter(context, productList);
+                    recProduct.setHasFixedSize(true);
+                    recProduct.setAdapter(productAdapter);
+                    productAdapter.notifyDataSetChanged();
+                } else {
+                    Log.i("TAG", "fail");
+                    System.out.println("Zoo - Errors");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.i("fail ", t.getMessage());
+            }
+        });
+    }
 }
+

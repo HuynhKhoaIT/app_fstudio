@@ -18,19 +18,20 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface APIService {
-
     //ServiceAPI
     APIService serviceapi = new Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("http://10.0.2.2:8080/myapp/")
             .build()
             .create(APIService.class);
-
     // san pham
     @GET("sanpham")
     Call<List<Product>> getAllProduct();
+    @GET("sanpham-by-dm")
+    Call<List<Product>> getSanPhamByDanhMuc(@Query("maDM") int maDM);
     // danh muc
     @GET("danhmuc")
     Call<List<Category>> getAllCategory();
