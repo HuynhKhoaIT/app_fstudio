@@ -23,7 +23,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountFragment extends Fragment {
-
     TextView userName;
     Button logout;
     GoogleSignInClient gClient;
@@ -56,7 +55,6 @@ public class AccountFragment extends Fragment {
                 });
             }
         });
-
         return view;
     }
 }

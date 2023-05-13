@@ -23,16 +23,13 @@ import com.example.applestore.model.Product;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-
     private Context context;
-
     private List<Product> mProductList;
 
     public ProductAdapter(Context applicationContext, List<Product> productList) {
         this.context = applicationContext;
         mProductList = productList;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,20 +37,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 .inflate(R.layout.item_product, parent, false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = mProductList.get(position);
         holder.productName.setText(product.getTenSP());
         holder.productPrice.setText(CurrencyFormatter.formatCurrency(product.getGiaBanThuong()));
-
         Glide.with(context).load(product.getAnh()).into(holder.productImage);
-
         holder.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailProductActivity.class);
-
                 intent.putExtra("Image", mProductList.get(holder.getAdapterPosition()).getAnh());
                 intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getTenSP());
                 intent.putExtra("Price", CurrencyFormatter.formatCurrency(mProductList.get(holder.getAdapterPosition()).getGiaBanThuong()));
@@ -62,12 +55,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return mProductList.size();
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView productImage;
         public TextView productName;

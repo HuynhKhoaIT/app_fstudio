@@ -14,7 +14,6 @@ public class Banner implements Serializable {
 
     public Banner() {
     }
-
     public Banner(int maB, String tieuDeB, String anh) {
         this.maB = maB;
         this.tieuDeB = tieuDeB;

@@ -1,5 +1,6 @@
 package com.example.applestore.APIService;
 
+import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 import com.google.gson.JsonObject;
 
@@ -10,6 +11,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -26,6 +28,12 @@ public interface APIService {
             .build()
             .create(APIService.class);
 
+    // san pham
     @GET("sanpham")
     Call<List<Product>> getAllProduct();
+    // danh muc
+    @GET("danhmuc")
+    Call<List<Category>> getAllCategory();
+    @POST("danhmuc")
+    Call<Category> createCategory(@Body Category category) ;
 }

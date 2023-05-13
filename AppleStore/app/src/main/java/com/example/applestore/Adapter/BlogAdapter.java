@@ -28,7 +28,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
         this.blogList = blogList;
     }
 
-
     @NonNull
     @Override
     public BlogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,7 +35,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
                 .inflate(R.layout.item_blog, parent, false);
         return new BlogViewHolder(itemView);
     }
-
     @Override
     public void onBindViewHolder(@NonNull BlogViewHolder holder, int position) {
         Blog blog = blogList.get(position);
@@ -70,8 +68,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder
             recCard = itemView.findViewById(R.id.recCard);
         }
     }
-
-
     @Override
     public int getItemCount() {
         return blogList.size();
