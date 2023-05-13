@@ -1,6 +1,8 @@
 package com.example.applestore.Activity;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,9 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.applestore.APIService.APIService;
 import com.example.applestore.Adapter.CategoryAdapter;
@@ -18,7 +19,6 @@ import com.example.applestore.Adapter.ProductAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.model.Product;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,6 +28,8 @@ import retrofit2.Response;
 public class ProductActivity extends AppCompatActivity {
 
     Context context = this;
+
+    private SearchView searchView;
     List<Product> productList;
 
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
@@ -36,7 +38,6 @@ public class ProductActivity extends AppCompatActivity {
     int id;
     RecyclerView recProduct;
     ProductAdapter productAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,9 @@ public class ProductActivity extends AppCompatActivity {
         recProduct = findViewById(R.id.product_list);
         recProduct.setLayoutManager(new GridLayoutManager(context, 2));
         getProducts();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
     private void getData() {
         Intent intent = getIntent();
@@ -73,5 +77,30 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
     }
+
+
+//    bắt sự kiện trên toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Search...");
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.search:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }
 

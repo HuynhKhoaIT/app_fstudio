@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        toolbar = findViewById(R.id.toolbar); //Ignore red line errors
-        setSupportActionBar(toolbar);
+//        toolbar = findViewById(R.id.toolbar); //Ignore red line errors
+//        setSupportActionBar(toolbar);
 //      Ánh xạ
         coordinatorLayout = findViewById(R.id.coordinatorLayout);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);

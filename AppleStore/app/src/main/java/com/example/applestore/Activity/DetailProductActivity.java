@@ -1,9 +1,11 @@
 package com.example.applestore.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,6 +40,10 @@ public class DetailProductActivity extends AppCompatActivity {
         detailDes = findViewById(R.id.des_product);
         detailImage = findViewById(R.id.img_product);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             detailName.setText(bundle.getString("Title"));
@@ -68,5 +74,20 @@ public class DetailProductActivity extends AppCompatActivity {
                 Toast.makeText(context,"error",Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+//    Bắt sự kiện khi bấm vào nút mũi tên quay lại
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

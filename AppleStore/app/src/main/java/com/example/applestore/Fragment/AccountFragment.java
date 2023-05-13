@@ -26,8 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AccountFragment extends Fragment {
     TextView userName;
     Button logout;
-
-
     GoogleSignInClient gClient;
     GoogleSignInOptions gOptions;
 
