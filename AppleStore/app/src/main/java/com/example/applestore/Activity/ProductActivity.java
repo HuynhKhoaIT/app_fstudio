@@ -57,11 +57,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if (response.isSuccessful()) {
-                    System.out.println(response.body().toString());
                     productList = response.body();
-                    System.out.println(response.body());
-                    System.out.println("Zoo");
-                    System.out.println(productList.get(0).getAnh());
                     productAdapter = new ProductAdapter(context, productList);
                     recProduct.setHasFixedSize(true);
                     recProduct.setAdapter(productAdapter);
