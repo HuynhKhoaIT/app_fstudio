@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.applestore.R;
 
 public class DetailBlogActivity extends AppCompatActivity {
@@ -22,7 +23,8 @@ public class DetailBlogActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            detailImage.setImageResource(bundle.getInt("Image"));
+            //detailImage.setImageResource(bundle.getInt("Image"));
+            Glide.with(this).load(bundle.getString("Image")).into(detailImage);
             detailTitle.setText(bundle.getString("Title"));
             detailDesc.setText(bundle.getString("Desc"));
         }
