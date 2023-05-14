@@ -18,6 +18,7 @@ import com.example.applestore.Adapter.CategoryAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
+import com.example.applestore.model.Cart;
 import com.example.applestore.model.User;
 import com.google.android.gms.common.internal.ConnectionTelemetryConfiguration;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -92,6 +93,9 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()){
+
+                                createCusCart(user);
+
                                 Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                                 startActivity(intent);
@@ -119,6 +123,10 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
             }
         });
+    }
+    private void createCusCart(User user){
+        Cart cart = new Cart(user);
+        Call<Cart> call = apiService.createCart(cart);
     }
 
 }

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.applestore.APIService.APIService;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
+import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 
@@ -33,13 +34,11 @@ public class DetailProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_product);
-
         btnAddProduct = findViewById(R.id.add_product);
         detailName = findViewById(R.id.name_product);
         detailPrice = findViewById(R.id.price_product);
         detailDes = findViewById(R.id.des_product);
         detailImage = findViewById(R.id.img_product);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle = getIntent().getExtras();
@@ -49,25 +48,25 @@ public class DetailProductActivity extends AppCompatActivity {
             detailDes.setText(bundle.getString("Desc"));
             Glide.with(context).load(bundle.getString("Image")).into(detailImage);
         }
-
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Test post
-                createCaterogy();
+
+//                createCaterogy();
             }
         });
     }
-    private void createCaterogy(){
-        Category category = new Category("Test","Test");
-        Call<Category> call = apiService.createCategory(category);
-        call.enqueue(new Callback<Category>() {
+    private void addProductToCart(){
+        CartDetail cartDetail = new CartDetail();
+        Call<CartDetail> call = apiService.addProductToCart(cartDetail);
+        call.enqueue(new Callback<CartDetail>() {
             @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
+            public void onResponse(Call<CartDetail> call, Response<CartDetail> response) {
                 Toast.makeText(context,"success",Toast.LENGTH_LONG).show();
             }
             @Override
-            public void onFailure(Call<Category> call, Throwable t) {
+            public void onFailure(Call<CartDetail> call, Throwable t) {
                 Toast.makeText(context,"error",Toast.LENGTH_LONG).show();
             }
         });

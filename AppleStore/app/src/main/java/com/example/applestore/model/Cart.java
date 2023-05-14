@@ -24,6 +24,10 @@ public class Cart implements Serializable {
         this.chiTietGioHangs = chiTietGioHangs;
         this.isDelete = isDelete;
     }
+    public Cart(User khachHang){
+        this.khachHang = khachHang;
+        isDelete = 0;
+    }
 
     public int getMaGH() {
         return maGH;
