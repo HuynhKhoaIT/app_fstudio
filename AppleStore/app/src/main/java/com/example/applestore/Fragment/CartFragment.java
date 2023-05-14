@@ -42,7 +42,6 @@ public class CartFragment extends Fragment {
     TextView cart_subtotal_value;
     Button cart_checkout_button;
     RecyclerView rcItemCart;
-    Cart cart;
     CartAdapter cartAdapter;
 
     public CartFragment() {
@@ -56,21 +55,27 @@ public class CartFragment extends Fragment {
         cart_subtotal_text = view.findViewById(R.id.cart_subtotal_text);
         cart_subtotal_value = view.findViewById(R.id.cart_subtotal_value);
         cart_checkout_button = view.findViewById(R.id.cart_checkout_button);
+        rcItemCart = view.findViewById(R.id.rcItemCart);
+        rcItemCart.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+
         context = getActivity();
-        rcItemCart.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
         int idUser = SharedPrefManager.getInstance(context).getUser().getMaKH();
+        System.out.println(idUser);
+
         getCartDetail(idUser);
 
         return view;
     }
     private void getCartDetail(int idUser){
-        Call<Cart> call = apiService.getGioiHangBymaKH(idUser);
+        Call<Cart> call = apiService.getGioHangBymaKH(idUser);
         call.enqueue(new Callback<Cart>() {
             @Override
             public void onResponse(Call<Cart> call, Response<Cart> response) {
                 if(response.isSuccessful()){
-                    cart = response.body();
+                    Cart cart = response.body();
+                    System.out.println(response.body());
+                    System.out.println(cart.getChiTietGioHangs().size());
                     listCartDetail = cart.getChiTietGioHangs();
                     System.out.println(response.body());
                     System.out.println("Zoo");
@@ -86,7 +91,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onFailure(Call<Cart> call, Throwable t) {
                 Log.i("TAG", t.toString());
-                System.out.println("Zoo - Errors");
+                System.out.println("Errors");
             }
         });
     }

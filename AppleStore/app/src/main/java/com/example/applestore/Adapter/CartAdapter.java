@@ -1,6 +1,7 @@
 package com.example.applestore.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.applestore.Activity.DetailProductActivity;
 import com.example.applestore.R;
 import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.CartDetail;
@@ -40,7 +42,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         holder.productName.setText(cartDetail.getSanPham3().getTenSP());
         holder.productPrice.setText(CurrencyFormatter.formatCurrency(cartDetail.getSanPham3().getGiaBanThuong()));
         Glide.with(context).load(cartDetail.getSanPham3().getAnh()).into(holder.productImage);
-        holder.productAmount.setText(cartDetail.getSoLuong());
+        holder.productAmount.setText(cartDetail.getSoLuong()+"");
+        holder.productImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailProductActivity.class);
+                intent.putExtra("Image", listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getAnh());
+                intent.putExtra("Title", listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getTenSP());
+                intent.putExtra("Price", CurrencyFormatter.formatCurrency(listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getGiaBanThuong()));
+                intent.putExtra("Desc", listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getMoTa());
+                context.startActivity(intent);
+            }
+        });
 
     }
     @Override
