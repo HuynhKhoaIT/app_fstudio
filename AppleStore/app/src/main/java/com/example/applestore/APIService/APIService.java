@@ -35,6 +35,8 @@ public interface APIService {
     Call<List<Product>> getAllProduct();
     @GET("sanpham-by-dm")
     Call<List<Product>> getSanPhamByDanhMuc(@Query("maDM") int maDM);
+    @GET("top8")
+    Call<List<Product>> getTop8Product();
 
     // Danh Muc
     @GET("danhmuc")

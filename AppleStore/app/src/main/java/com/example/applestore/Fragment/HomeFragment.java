@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getProduct(){
-        Call<List<Product>> call = apiService.getAllProduct();
+        Call<List<Product>> call = apiService.getTop8Product();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
