@@ -51,8 +51,8 @@ public interface APIService {
     // Cart
     @POST("giohang")
     Call<Cart> createUser(@Body Cart cart);
-    @GET("giohang")
-    Call<Cart> getGioiHangBymaKH(@Query("maKH") int maKH);
+    @GET("giohangbymakh")
+    Call<Cart> getGioHangBymaKH(@Query("id") int maKH);
     //Blog
     @GET("baiviet")
     Call<List<Blog>> getAllBlog();
