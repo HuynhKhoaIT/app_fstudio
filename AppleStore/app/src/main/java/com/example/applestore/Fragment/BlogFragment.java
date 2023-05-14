@@ -11,15 +11,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.applestore.APIService.APIService;
+import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.model.Blog;
 import com.example.applestore.Adapter.BlogAdapter;
 import com.example.applestore.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BlogFragment extends Fragment {
     private Context context;
     private RecyclerView mRecyclerView;
+    List<Blog> blogs;
+    APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
     BlogAdapter adapter;
     public BlogFragment() {}
 
@@ -30,11 +39,29 @@ public class BlogFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.blog_list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
-        List<Blog> blogList = new ArrayList<>();
-
-//        BlogAdapter adapter = new BlogAdapter(context, blogList);
-        adapter = new BlogAdapter(getActivity(), blogList);
-        mRecyclerView.setAdapter(adapter);
+        getAllBlog();
         return view;
+    }
+    private  void getAllBlog()
+    {
+        Call<List<Blog>> call= apiService.getAllBlog();
+        call.enqueue(new Callback<List<Blog>>() {
+            @Override
+            public void onResponse(Call<List<Blog>> call, Response<List<Blog>> response) {
+                if(response.isSuccessful())
+                {
+                    blogs =response.body();
+                    adapter =new BlogAdapter(getContext(),blogs);
+                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Blog>> call, Throwable t) {
+
+            }
+        });
     }
 }
