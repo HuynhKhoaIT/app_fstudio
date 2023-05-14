@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment {
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
     ProductAdapter productAdapter;
     List<Product> productList;
-
     List<Category> categories;
     CategoryAdapter categoryAdapter;
     private Context context;
