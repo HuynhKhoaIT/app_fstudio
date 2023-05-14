@@ -44,7 +44,7 @@ public class AccountFragment extends Fragment {
         logout = view.findViewById(R.id.logout);
 
         //anh xa
-//        tvId = (TextView)view.findViewById(R.id.tvId);
+
         tvName = (TextView)view.findViewById(R.id.tvFname);
         tvPhone = (TextView)view.findViewById(R.id.tvPhone);
         tvEmail = (TextView)view.findViewById(R.id.tvEmail);
