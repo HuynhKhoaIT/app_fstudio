@@ -13,6 +13,7 @@ import com.example.applestore.Fragment.AccountFragment;
 import com.example.applestore.Fragment.BlogFragment;
 import com.example.applestore.Fragment.CartFragment;
 import com.example.applestore.Fragment.HomeFragment;
+import com.example.applestore.Fragment.OrderFragment;
 import com.example.applestore.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.blog:
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new BlogFragment()).commit();
+                    break;
+                case R.id.order:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new OrderFragment()).commit();
                     break;
                 case R.id.account:
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new AccountFragment()).commit();
