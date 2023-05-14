@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -59,9 +60,11 @@ public interface APIService {
     //Blog
     @GET("baiviet")
     Call<List<Blog>> getAllBlog();
+
     //DetailCart
-    @GET("ctgh")
-    Call<CartDetail> addProductToCart(@Body CartDetail cartDetail);
+    @POST("ctgh")
+    Call<CartDetail> addProductToCart(@Body CartDetail cartDetail, @Query("id") int id);
 
-
+    @DELETE("delete-item-cart")
+    Call<CartDetail> deleteCartItem(@Query("idKH") int idKH,@Query("idSP") int idSP);
 }

@@ -6,23 +6,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.applestore.APIService.APIService;
 import com.example.applestore.Activity.DetailProductActivity;
 import com.example.applestore.R;
+import com.example.applestore.Retrofit.RetrofitClient;
+import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.CartDetail;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     private Context context;
     private List<CartDetail> listCartDetail;
+
+    APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
     public CartAdapter(Context applicationContext, List<CartDetail> listCartDetail) {
         this.context = applicationContext;
@@ -51,7 +62,39 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
                 intent.putExtra("Title", listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getTenSP());
                 intent.putExtra("Price", CurrencyFormatter.formatCurrency(listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getGiaBanThuong()));
                 intent.putExtra("Desc", listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getMoTa());
+                intent.putExtra("maSP",listCartDetail.get(holder.getAdapterPosition()).getSanPham3().getMaSP());
                 context.startActivity(intent);
+            }
+        });
+        holder.remove_product_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int idSP = cartDetail.getSanPham3().getMaSP();
+                int idKH = SharedPrefManager.getInstance(context).getUser().getMaKH();
+
+                System.out.println(idSP+"/"+idKH);
+                removeItemInCart(idSP,idKH);
+            }
+        });
+    }
+    // xóa sản phẩm ra khỏi giỏ hàng
+    public void removeItemInCart(int idSP, int idKH){
+        Call<CartDetail> call = apiService.deleteCartItem(idKH,idSP);
+        call.enqueue(new Callback<CartDetail>() {
+            @Override
+            public void onResponse(Call<CartDetail> call, Response<CartDetail> response) {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(context,"Xóa thành công",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(context,"Xóa thất bại",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartDetail> call, Throwable t) {
+
             }
         });
 
@@ -61,14 +104,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         return listCartDetail.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageButton remove_product_button;
         public ImageView productImage;
         public TextView productName;
         public TextView productPrice;
-        public Button btnMinus;
+        public TextView btnMinus;
         public TextView productAmount;
-        public Button btnPlus;
-
-
+        public TextView btnPlus;
 //        public CardView item_Cart;
 
         public ViewHolder(View itemView) {
@@ -79,6 +122,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             btnMinus = itemView.findViewById(R.id.quantity_minus_btn);
             productAmount = itemView.findViewById(R.id.quantity_text_view);
             btnPlus = itemView.findViewById(R.id.quantity_plus_button);
+            remove_product_button = itemView.findViewById(R.id.remove_product_button);
         }
     }
 }

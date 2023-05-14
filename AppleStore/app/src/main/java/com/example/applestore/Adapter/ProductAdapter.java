@@ -51,6 +51,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getTenSP());
                 intent.putExtra("Price", CurrencyFormatter.formatCurrency(mProductList.get(holder.getAdapterPosition()).getGiaBanThuong()));
                 intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getMoTa());
+                intent.putExtra("maSP",mProductList.get(holder.getAdapterPosition()).getMaSP());
                 context.startActivity(intent);
             }
         });
@@ -63,7 +64,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public ImageView productImage;
         public TextView productName;
         public TextView productPrice;
-
         public CardView productCard;
 
         public ViewHolder(View itemView) {

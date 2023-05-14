@@ -73,25 +73,18 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
 
                 if(response.isSuccessful()){
-                    System.out.println(response.body().toString());
                     categories = response.body();
-                    System.out.println(response.body());
-                    System.out.println("Zoo");
-                    System.out.println(categories.get(0).getTenDM());
                     categoryAdapter = new CategoryAdapter(getContext(),categories);
                     categoryRec.setHasFixedSize(true);
-//                    mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     categoryRec.setAdapter(categoryAdapter);
                     categoryAdapter.notifyDataSetChanged();
                 }else{
                     Log.i("TAG","fail");
-                    System.out.println("Zoo - Errors");
                 }
             }
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
                 Log.i("TAG", t.toString());
-                System.out.println("Zoo - Errors");
             }
         });
     }
@@ -103,24 +96,18 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 if(response.isSuccessful()){
-                    System.out.println(response.body().toString());
                     productList = response.body();
-                    System.out.println(response.body());
-                    System.out.println("Zoo");
-                    System.out.println(productList.get(0).getAnh());
                     productAdapter = new ProductAdapter(getContext(),productList);
                     mRecyclerView.setHasFixedSize(true);
                     mRecyclerView.setAdapter(productAdapter);
                     productAdapter.notifyDataSetChanged();
                 }else{
                     Log.i("TAG","fail");
-                    System.out.println("Zoo - Errors");
                 }
             }
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Log.i("TAG", t.toString());
-                System.out.println("Zoo - Errors");
             }
         });
     }

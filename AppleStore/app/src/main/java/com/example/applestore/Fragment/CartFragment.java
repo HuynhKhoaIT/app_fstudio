@@ -22,6 +22,7 @@ import com.example.applestore.Adapter.CategoryAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
+import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Cart;
 import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
@@ -74,25 +75,32 @@ public class CartFragment extends Fragment {
             public void onResponse(Call<Cart> call, Response<Cart> response) {
                 if(response.isSuccessful()){
                     Cart cart = response.body();
-                    System.out.println(response.body());
-                    System.out.println(cart.getChiTietGioHangs().size());
                     listCartDetail = cart.getChiTietGioHangs();
-                    System.out.println(response.body());
-                    System.out.println("Zoo");
                     cartAdapter = new CartAdapter(getContext(),listCartDetail);
                     rcItemCart.setHasFixedSize(true);
                     rcItemCart.setAdapter(cartAdapter);
+                    cart_subtotal_value.setText( CurrencyFormatter.formatCurrency(tongTienGioHang(listCartDetail)));
                     cartAdapter.notifyDataSetChanged();
                 }else{
                     Log.i("TAG","fail");
-                    System.out.println("Zoo - Errors");
                 }
             }
             @Override
             public void onFailure(Call<Cart> call, Throwable t) {
                 Log.i("TAG", t.toString());
-                System.out.println("Errors");
             }
         });
     }
+    public int tongTienGioHang(List<CartDetail> listCartDetail) {
+        int total = 0;
+
+        for (CartDetail cartDetail : listCartDetail) {
+            int quantity = cartDetail.getSoLuong();
+            int price = cartDetail.getSanPham3().getGiaBanThuong();
+            total += quantity * price;
+        }
+        return total;
+    }
+
+
 }

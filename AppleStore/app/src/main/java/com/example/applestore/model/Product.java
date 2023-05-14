@@ -36,6 +36,9 @@ public class Product implements Serializable {
 
     public Product() {
     }
+    public Product(int maSP) {
+        this.maSP = maSP;
+    }
 
     public Product(int maSP, Category danhMuc, String tenSP, String moTa, int giaGoc, int giaBanThuong, int giaKhuyenMai, int soLuong, String anh, String moTaNgan, int isDeteted, List<ProductPicture> listAnhSanPham, List<OrderDetail> listCTDH) {
         this.maSP = maSP;

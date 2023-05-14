@@ -31,13 +31,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
-
     private FirebaseAuth auth;
     private EditText signupEmail, signupPassword, signupCusName, signupPhone,signupAddress;
     private Button signupButton;
     private TextView loginRedirecText;
     private Context context = this;
-
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
     @Override
@@ -55,12 +53,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         signupButton = findViewById(R.id.signup_button);
         loginRedirecText = findViewById(R.id.loginRedirectText);
-
-
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //getValue
                 String name = signupCusName.getText().toString();
                 String email = signupEmail.getText().toString().trim();
@@ -93,9 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()){
-
-                                createCusCart(user);
-
                                 Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                                 startActivity(intent);
@@ -112,8 +104,6 @@ public class SignUpActivity extends AppCompatActivity {
                             System.out.println("Zoo - Errors");
                         }
                     });
-
-
                 }
             }
         });
@@ -124,9 +114,4 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-    private void createCusCart(User user){
-        Cart cart = new Cart(user);
-        Call<Cart> call = apiService.createCart(cart);
-    }
-
 }

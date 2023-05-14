@@ -26,10 +26,9 @@ public class CartDetail implements Serializable {
         this.soLuong = soLuong;
         this.idDelete = idDelete;
     }
-    public CartDetail(Cart gioHang, Product sanPham3) {
-        this.gioHang = gioHang;
-        this.sanPham3 = sanPham3;
-        this.soLuong = 1;
+    public CartDetail(int idSP,int soLuong) {
+        this.sanPham3 = new Product(idSP);
+        this.soLuong = soLuong;
         this.idDelete = 0;
     }
 
