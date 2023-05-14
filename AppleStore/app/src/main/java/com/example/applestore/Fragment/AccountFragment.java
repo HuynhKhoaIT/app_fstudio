@@ -32,7 +32,7 @@ public class AccountFragment extends Fragment {
     GoogleSignInOptions gOptions;
 
     ImageView imvAvt;
-    TextView tvId, tvName,tvPhone,tvEmail,tvAddress;
+    TextView tvName,tvPhone,tvEmail,tvAddress;
 
 
 
@@ -44,8 +44,8 @@ public class AccountFragment extends Fragment {
         logout = view.findViewById(R.id.logout);
 
         //anh xa
-        tvId = (TextView)view.findViewById(R.id.tvId);
-        tvName = (TextView)view.findViewById(R.id.tvName);
+//        tvId = (TextView)view.findViewById(R.id.tvId);
+        tvName = (TextView)view.findViewById(R.id.tvFname);
         tvPhone = (TextView)view.findViewById(R.id.tvPhone);
         tvEmail = (TextView)view.findViewById(R.id.tvEmail);
         tvAddress = (TextView)view.findViewById(R.id.tvAddress);
@@ -61,7 +61,6 @@ public class AccountFragment extends Fragment {
         User user = SharedPrefManager.getInstance(getContext()).getUser();
 
         // show user info
-        tvId.setText(user.getMaKH()+"");
         tvName.setText(user.getTenKH());
         tvAddress.setText(user.getDiaChi());
         tvPhone.setText(user.getPhone());
