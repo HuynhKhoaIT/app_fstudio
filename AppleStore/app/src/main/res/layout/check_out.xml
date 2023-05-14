@@ -23,14 +23,28 @@
         android:clipToPadding="false"
         android:layout_above="@+id/layout_checkout_details" />
     <!-- Tổng giá tiền -->
-    <TextView
-        android:id="@+id/tv_total_price"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tổng giá tiền: "
-        android:textStyle="bold"
         android:layout_below="@+id/rv_product_list"
-        android:layout_marginTop="16dp" />
+        android:paddingStart="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng giá tiền: "
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="130000000 Đ"
+            android:textColor="#FB0808"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+
 
 
     <!-- Chi tiết thanh toán -->
