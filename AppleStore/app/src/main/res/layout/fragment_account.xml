@@ -97,7 +97,7 @@
                 android:text="Tên"
                 android:textSize="20dp"/>
             <TextView
-                android:id="@+id/c"
+                android:id="@+id/tvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
@@ -115,10 +115,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:text="Họ tên"
+                android:text="SĐT"
                 android:textSize="20dp"/>
             <TextView
-                android:id="@+id/tvFname"
+                android:id="@+id/tvPhone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
@@ -157,10 +157,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:text="Giới tính"
+                android:text="Địa chỉ"
                 android:textSize="20dp"/>
             <TextView
-                android:id="@+id/tvGender"
+                android:id="@+id/tvAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"

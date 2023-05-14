@@ -42,8 +42,6 @@ public class DetailProductActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             detailName.setText(bundle.getString("Title"));
@@ -63,7 +61,6 @@ public class DetailProductActivity extends AppCompatActivity {
     private void createCaterogy(){
         Category category = new Category("Test","Test");
         Call<Category> call = apiService.createCategory(category);
-
         call.enqueue(new Callback<Category>() {
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
@@ -75,7 +72,6 @@ public class DetailProductActivity extends AppCompatActivity {
             }
         });
     }
-
 //    Bắt sự kiện khi bấm vào nút mũi tên quay lại
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
