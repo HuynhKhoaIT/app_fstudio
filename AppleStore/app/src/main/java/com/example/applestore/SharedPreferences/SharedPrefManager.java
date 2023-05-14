@@ -54,7 +54,6 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_EMAIL,null) != null;
     }
-
     public User getUser() {
         SharedPreferences sharedPreferences=ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return new User(
@@ -68,7 +67,6 @@ public class SharedPrefManager {
                 sharedPreferences.getInt(KEY_IS_ADMIN,-1)
         );
     }
-
     public void logout(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

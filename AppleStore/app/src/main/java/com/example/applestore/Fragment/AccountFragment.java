@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.applestore.Activity.LoginActivity;
 import com.example.applestore.R;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
+import com.example.applestore.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,6 +31,10 @@ public class AccountFragment extends Fragment {
     GoogleSignInClient gClient;
     GoogleSignInOptions gOptions;
 
+    ImageView imvAvt;
+    TextView tvId, tvName,tvPhone,tvEmail,tvAddress;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +43,13 @@ public class AccountFragment extends Fragment {
 
         logout = view.findViewById(R.id.logout);
 
+        //anh xa
+        tvId = (TextView)view.findViewById(R.id.tvId);
+        tvName = (TextView)view.findViewById(R.id.tvName);
+        tvPhone = (TextView)view.findViewById(R.id.tvPhone);
+        tvEmail = (TextView)view.findViewById(R.id.tvEmail);
+        tvAddress = (TextView)view.findViewById(R.id.tvAddress);
+
         gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gClient = GoogleSignIn.getClient(getContext(), gOptions);
         GoogleSignInAccount gAccount = GoogleSignIn.getLastSignedInAccount(getContext());
@@ -44,6 +57,16 @@ public class AccountFragment extends Fragment {
             String gName = gAccount.getDisplayName();
             userName.setText(gName);
         }
+        //getUser from SharedPrefManager
+        User user = SharedPrefManager.getInstance(getContext()).getUser();
+
+        // show user info
+        tvId.setText(user.getMaKH()+"");
+        tvName.setText(user.getTenKH());
+        tvAddress.setText(user.getDiaChi());
+        tvPhone.setText(user.getPhone());
+        tvEmail.setText(user.getEmail());
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

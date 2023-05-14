@@ -43,9 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-
-
         // ánh xạ
         auth = FirebaseAuth.getInstance();
 
@@ -88,7 +85,6 @@ public class SignUpActivity extends AppCompatActivity {
 //                            }
 //                        }
 //                    });
-
                     User user = new User(name,email,phone,address,pass,1,0);
                     //Database
                     Call<User> call = apiService.createUser(user);
@@ -97,7 +93,9 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(response.isSuccessful()){
                                 Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
-
+                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
                             }else{
                                 Toast.makeText(SignUpActivity.this,"Đăng ký thất bại",Toast.LENGTH_LONG).show();
                                 Log.i("TAG","fail");

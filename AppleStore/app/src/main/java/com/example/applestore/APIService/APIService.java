@@ -1,5 +1,6 @@
 package com.example.applestore.APIService;
 
+import com.example.applestore.model.Cart;
 import com.example.applestore.model.Blog;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
@@ -47,7 +48,11 @@ public interface APIService {
     @FormUrlEncoded
     @POST("khachhang-login")
     Call<User> loginUser(@Field("email") String username, @Field("password") String password);
-
+    // Cart
+    @POST("giohang")
+    Call<Cart> createUser(@Body Cart cart);
+    @GET("giohang")
+    Call<Cart> getGioiHangBymaKH(@Query("maKH") int maKH);
     //Blog
     @GET("baiviet")
     Call<List<Blog>> getAllBlog();
