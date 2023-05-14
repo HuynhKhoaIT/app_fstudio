@@ -1,6 +1,7 @@
 package com.example.applestore.APIService;
 
 import com.example.applestore.model.Cart;
+import com.example.applestore.model.Blog;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 import com.example.applestore.model.User;
@@ -52,4 +53,7 @@ public interface APIService {
     Call<Cart> createUser(@Body Cart cart);
     @GET("giohang")
     Call<Cart> getGioiHangBymaKH(@Query("maKH") int maKH);
+    //Blog
+    @GET("baiviet")
+    Call<List<Blog>> getAllBlog();
 }
