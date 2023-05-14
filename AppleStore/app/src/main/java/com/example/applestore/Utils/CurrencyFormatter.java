@@ -6,6 +6,6 @@ import java.text.NumberFormat;
 public class CurrencyFormatter {
     public static String formatCurrency(long amount){
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        return numberFormat.format(amount);
+        return numberFormat.format(amount) + " VNĐ";
     }
 }

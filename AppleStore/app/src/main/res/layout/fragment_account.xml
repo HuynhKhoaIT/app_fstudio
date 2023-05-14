@@ -251,7 +251,6 @@
                 android:text="so 1 vo van ngaan quanj thu duc thanh pho ho chi minh "
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-
         </LinearLayout>
 
         <Button

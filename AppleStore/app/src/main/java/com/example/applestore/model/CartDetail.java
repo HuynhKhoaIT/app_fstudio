@@ -9,8 +9,8 @@ public class CartDetail implements Serializable {
     int maCTGH;
     @SerializedName("gioHang")
     private Cart gioHang;
-    @SerializedName("maSP")
-    int maSP;
+    @SerializedName("sanPham3")
+    private Product sanPham3;
     @SerializedName("soLuong")
     int soLuong;
     @SerializedName("idDelete")
@@ -19,10 +19,10 @@ public class CartDetail implements Serializable {
     public CartDetail() {
     }
 
-    public CartDetail(int maCTGH, Cart gioHang, int maSP, int soLuong, int idDelete) {
+    public CartDetail(int maCTGH, Cart gioHang, Product sanPham3, int soLuong, int idDelete) {
         this.maCTGH = maCTGH;
         this.gioHang = gioHang;
-        this.maSP = maSP;
+        this.sanPham3 = sanPham3;
         this.soLuong = soLuong;
         this.idDelete = idDelete;
     }
@@ -43,12 +43,12 @@ public class CartDetail implements Serializable {
         this.gioHang = gioHang;
     }
 
-    public int getMaSP() {
-        return maSP;
+    public Product getSanPham3() {
+        return sanPham3;
     }
 
-    public void setMaSP(int maSP) {
-        this.maSP = maSP;
+    public void setSanPham3(Product sanPham3) {
+        this.sanPham3 = sanPham3;
     }
 
     public int getSoLuong() {
