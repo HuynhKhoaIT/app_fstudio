@@ -1,6 +1,8 @@
 package com.example.applestore.Activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +27,8 @@ import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Cart;
 import com.example.applestore.model.CartDetail;
+import com.example.applestore.model.Order;
+import com.example.applestore.model.OrderStatus;
 import com.example.applestore.model.User;
 
 import java.util.ArrayList;
@@ -31,8 +36,9 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import java.util.Date;
 public class CheckoutActivity extends AppCompatActivity {
+
     RecyclerView rv_product_list;
     TextView tv_total_price;
     EditText et_customer_name;
@@ -45,6 +51,7 @@ public class CheckoutActivity extends AppCompatActivity {
     CartAdapter cartAdapter;
     CheckoutAdapter checkoutAdapter;
 
+    int totalPrice=0;
     private Context context;
 
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
@@ -69,7 +76,6 @@ public class CheckoutActivity extends AppCompatActivity {
         et_customer_name.setText(user.getTenKH());
         et_customer_phone.setText(user.getPhone());
         et_customer_address.setText(user.getDiaChi());
-
         int idUser = SharedPrefManager.getInstance(this).getUser().getMaKH();
         getCartDetail(idUser);
 
@@ -77,12 +83,35 @@ public class CheckoutActivity extends AppCompatActivity {
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, OrderFragment.class);
-                intent.putExtra("userName", et_customer_name.getText());
-                intent.putExtra("userPhone", et_customer_phone.getText());
-                intent.putExtra("userAddress",et_customer_address.getText());
-                intent.putExtra("totalPrice",tv_total_price.getText());
-                context.startActivity(intent);
+                Order order = new Order();
+                order.setKhachHang(user);
+                order.setDiaChi(et_customer_address.getText().toString());
+                order.setNgayDatHang(new Date());
+                order.setTrangThai(new OrderStatus(0));
+                order.setTongTien(totalPrice);
+                createOrder(order);
+
+            }
+        });
+    }
+    private void createOrder(Order order){
+        Call<Order> call = apiService.createOrder(order);
+        call.enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(context, "Thêm đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CheckoutActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(context, "Thêm đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                Toast.makeText(context, "Thêm đơn hàng thất bại", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -98,7 +127,8 @@ public class CheckoutActivity extends AppCompatActivity {
                     checkoutAdapter = new CheckoutAdapter(context,listCartDetail);
                     rv_product_list.setHasFixedSize(true);
                     rv_product_list.setAdapter(checkoutAdapter);
-                    tv_total_price.setText( CurrencyFormatter.formatCurrency(tongTienGioHang(listCartDetail)));
+                    totalPrice = tongTienGioHang(listCartDetail);
+                    tv_total_price.setText( CurrencyFormatter.formatCurrency(totalPrice));
                     checkoutAdapter.notifyDataSetChanged();
                 }else{
                     Log.i("TAG","fail");
@@ -120,6 +150,4 @@ public class CheckoutActivity extends AppCompatActivity {
         }
         return total;
     }
-
-
 }

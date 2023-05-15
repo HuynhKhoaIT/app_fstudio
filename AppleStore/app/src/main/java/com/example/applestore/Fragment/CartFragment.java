@@ -59,13 +59,12 @@ public class CartFragment extends Fragment implements QuantityChangeListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         //Ánh xạ
+        context = getActivity();
         cart_subtotal_text = view.findViewById(R.id.cart_subtotal_text);
         cart_subtotal_value = view.findViewById(R.id.cart_subtotal_value);
         cart_checkout_button = view.findViewById(R.id.cart_checkout_button);
         rcItemCart = view.findViewById(R.id.rcItemCart);
         rcItemCart.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-
-        context = getActivity();
 
         int idUser = SharedPrefManager.getInstance(context).getUser().getMaKH();
         System.out.println(idUser);
