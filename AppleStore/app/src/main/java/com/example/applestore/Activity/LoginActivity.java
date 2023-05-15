@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -190,16 +192,32 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
+                    else {
+                        System.out.println("User null !");
+                        showLoginFailedDialog();
+                    }
                 }else{
                     Log.i("TAG","fail");
-                    System.out.println("Zoo - Errors");
+                    showLoginFailedDialog();
                 }
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                showLoginFailedDialog();
                 Log.i("TAG", t.toString());
-                System.out.println("Zoo - Errors");
             }
         });
+    }
+    private void showLoginFailedDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Lỗi đăng nhập");
+        builder.setMessage("Thông tin đăng nhập không hợp lệ. Vui lòng thử lại.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.applestore.APIService.APIService;
+import com.example.applestore.Fragment.CartFragment;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,6 +75,18 @@ public class DetailProductActivity extends AppCompatActivity {
                 addProductToCart(amountProduct,idSP,idKH);
             }
         });
+        btn_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btn_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
     private void addProductToCart(int amountProduct,int idSP,int idKH){
         //tạo ra 1 CartDetail
@@ -84,7 +99,8 @@ public class DetailProductActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     System.out.println(response.body());
-                    Toast.makeText(context,response.body().toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Thêm thành công",Toast.LENGTH_LONG).show();
+
                 }
                 else {
                     Toast.makeText(context,"Thêm sản phẩm thất bại",Toast.LENGTH_LONG).show();

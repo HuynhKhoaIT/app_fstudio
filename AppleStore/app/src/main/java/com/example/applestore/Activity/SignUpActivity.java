@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import java.util.List;
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText signupEmail, signupPassword, signupCusName, signupPhone,signupAddress;

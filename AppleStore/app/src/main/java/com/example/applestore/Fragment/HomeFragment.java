@@ -36,8 +36,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView,categoryRec;
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
     ProductAdapter productAdapter;
-    List<Product> productList;
-    List<Category> categories;
+    ArrayList<Product> productList;
+    ArrayList<Category> categories;
     CategoryAdapter categoryAdapter;
     private Context context;
     public HomeFragment() {}
@@ -67,10 +67,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
     private void getCategory(){
-        Call<List<Category>> call = apiService.getAllCategory();
-        call.enqueue(new Callback<List<Category>>() {
+        Call<ArrayList<Category>> call = apiService.getAllCategory();
+        call.enqueue(new Callback<ArrayList<Category>>() {
             @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+            public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
 
                 if(response.isSuccessful()){
                     categories = response.body();
@@ -83,17 +83,17 @@ public class HomeFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
                 Log.i("TAG", t.toString());
             }
         });
     }
 
     private void getProduct(){
-        Call<List<Product>> call = apiService.getTop8Product();
-        call.enqueue(new Callback<List<Product>>() {
+        Call<ArrayList<Product>> call = apiService.getTop8Product();
+        call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
 
                 if(response.isSuccessful()){
                     productList = response.body();
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Log.i("TAG", t.toString());
             }
         });

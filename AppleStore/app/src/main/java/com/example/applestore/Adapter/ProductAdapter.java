@@ -20,13 +20,14 @@ import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private Context context;
-    private List<Product> mProductList;
+    private ArrayList<Product> mProductList;
 
-    public ProductAdapter(Context applicationContext, List<Product> productList) {
+    public ProductAdapter(Context applicationContext, ArrayList<Product> productList) {
         this.context = applicationContext;
         mProductList = productList;
     }

@@ -15,14 +15,15 @@ import com.example.applestore.R;
 
 import com.example.applestore.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
 
     private Context context;
-    private List<Order> orderList;
+    private ArrayList<Order> orderList;
 
-    public OrderAdapter(Context applicationContext, List<Order> orderList) {
+    public OrderAdapter(Context applicationContext, ArrayList<Order> orderList) {
         this.context = applicationContext;
         this.orderList = orderList;
     }

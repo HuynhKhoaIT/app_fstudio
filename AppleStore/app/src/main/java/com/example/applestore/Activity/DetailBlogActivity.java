@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.applestore.R;
-
+import java.util.List;
 public class DetailBlogActivity extends AppCompatActivity {
     TextView detailDesc, detailTitle;
     ImageView detailImage;

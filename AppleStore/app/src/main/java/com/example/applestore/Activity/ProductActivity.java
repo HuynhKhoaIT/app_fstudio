@@ -19,6 +19,8 @@ import com.example.applestore.Adapter.ProductAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.model.Product;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +32,7 @@ public class ProductActivity extends AppCompatActivity {
     Context context = this;
 
     private SearchView searchView;
-    List<Product> productList;
+    ArrayList<Product> productList;
 
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
     public static final String KEY_PRODUCT_ID_TO_PRODUCT_DETAIL = "KEY_PRODUCT_ID_TO_PRODUCT_DETAIL";
@@ -55,10 +57,10 @@ public class ProductActivity extends AppCompatActivity {
         id = 1 + getIntent().getIntExtra(CategoryAdapter.KEY_CATEGORYID_TO_PRODUCT, 0);
     }
     private void getProducts() {
-        Call<List<Product>> call = apiService.getSanPhamByDanhMuc(id);
-        call.enqueue(new Callback<List<Product>>() {
+        Call<ArrayList<Product>> call = apiService.getSanPhamByDanhMuc(id);
+        call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
 
                 if (response.isSuccessful()) {
                     productList = response.body();
@@ -72,7 +74,7 @@ public class ProductActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Log.i("fail ", t.getMessage());
             }
         });

@@ -3,6 +3,7 @@ package com.example.applestore.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cart implements Serializable {
@@ -11,14 +12,14 @@ public class Cart implements Serializable {
     @SerializedName("khachHang")
     private User khachHang;
     @SerializedName("chiTietGioHangs")
-    private List<CartDetail> chiTietGioHangs;
+    private ArrayList<CartDetail> chiTietGioHangs;
     @SerializedName("isDelete")
     int isDelete;
 
     public Cart() {
     }
 
-    public Cart(int maGH, User khachHang, List<CartDetail> chiTietGioHangs, int isDelete) {
+    public Cart(int maGH, User khachHang, ArrayList<CartDetail> chiTietGioHangs, int isDelete) {
         this.maGH = maGH;
         this.khachHang = khachHang;
         this.chiTietGioHangs = chiTietGioHangs;
@@ -45,11 +46,11 @@ public class Cart implements Serializable {
         this.khachHang = khachHang;
     }
 
-    public List<CartDetail> getChiTietGioHangs() {
+    public ArrayList<CartDetail> getChiTietGioHangs() {
         return chiTietGioHangs;
     }
 
-    public void setChiTietGioHangs(List<CartDetail> chiTietGioHangs) {
+    public void setChiTietGioHangs(ArrayList<CartDetail> chiTietGioHangs) {
         this.chiTietGioHangs = chiTietGioHangs;
     }
 

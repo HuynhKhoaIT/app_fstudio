@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class BlogFragment extends Fragment {
     private Context context;
     private RecyclerView mRecyclerView;
-    List<Blog> blogs;
+    ArrayList<Blog> blogs;
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
     BlogAdapter adapter;
     public BlogFragment() {}
@@ -44,10 +44,10 @@ public class BlogFragment extends Fragment {
     }
     private  void getAllBlog()
     {
-        Call<List<Blog>> call= apiService.getAllBlog();
-        call.enqueue(new Callback<List<Blog>>() {
+        Call<ArrayList<Blog>> call= apiService.getAllBlog();
+        call.enqueue(new Callback<ArrayList<Blog>>(){
             @Override
-            public void onResponse(Call<List<Blog>> call, Response<List<Blog>> response) {
+            public void onResponse(Call<ArrayList<Blog>> call, Response<ArrayList<Blog>> response) {
                 if(response.isSuccessful())
                 {
                     blogs =response.body();
@@ -59,7 +59,7 @@ public class BlogFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Blog>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Blog>> call, Throwable t) {
 
             }
         });

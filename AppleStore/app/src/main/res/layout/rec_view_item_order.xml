@@ -36,6 +36,13 @@
                 android:text="Product Price"
                 android:textSize="14sp"
                 android:textColor="#FB0808"/>
+            <TextView
+                android:id="@+id/product_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Amount"
+                android:textSize="14sp"
+                android:textColor="#FB0808"/>
 
 
         </LinearLayout>

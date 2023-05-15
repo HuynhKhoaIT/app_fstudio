@@ -1,6 +1,7 @@
 package com.example.applestore.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,10 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.applestore.APIService.APIService;
+import com.example.applestore.Activity.CheckoutActivity;
 import com.example.applestore.Adapter.CartAdapter;
 import com.example.applestore.Adapter.CategoryAdapter;
+import com.example.applestore.Adapter.CheckoutAdapter;
+import com.example.applestore.Interface.QuantityChangeListener;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
@@ -27,17 +32,18 @@ import com.example.applestore.model.Cart;
 import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements QuantityChangeListener {
     private Context context;
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
-    List<CartDetail> listCartDetail;
+    ArrayList<CartDetail> listCartDetail;
 
     TextView cart_subtotal_text;
     TextView cart_subtotal_value;
@@ -65,6 +71,13 @@ public class CartFragment extends Fragment {
         System.out.println(idUser);
 
         getCartDetail(idUser);
+        cart_checkout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CheckoutActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -77,6 +90,8 @@ public class CartFragment extends Fragment {
                     Cart cart = response.body();
                     listCartDetail = cart.getChiTietGioHangs();
                     cartAdapter = new CartAdapter(getContext(),listCartDetail);
+                    //Thay đổi tiền
+                    cartAdapter.setQuantityChangeListener(CartFragment.this);
                     rcItemCart.setHasFixedSize(true);
                     rcItemCart.setAdapter(cartAdapter);
                     cart_subtotal_value.setText( CurrencyFormatter.formatCurrency(tongTienGioHang(listCartDetail)));
@@ -91,7 +106,7 @@ public class CartFragment extends Fragment {
             }
         });
     }
-    public int tongTienGioHang(List<CartDetail> listCartDetail) {
+    public int tongTienGioHang(ArrayList<CartDetail> listCartDetail) {
         int total = 0;
 
         for (CartDetail cartDetail : listCartDetail) {
@@ -101,6 +116,9 @@ public class CartFragment extends Fragment {
         }
         return total;
     }
-
-
+    @Override
+    public void onQuantityChanged() {
+        Toast.makeText(getContext(),"Đã giao tiếp",Toast.LENGTH_LONG).show();
+        cart_subtotal_value.setText( CurrencyFormatter.formatCurrency(tongTienGioHang(cartAdapter.getListCartDetail())));
+    }
 }
