@@ -90,11 +90,12 @@ public class CartFragment extends Fragment implements QuantityChangeListener {
                     listCartDetail = cart.getChiTietGioHangs();
                     cartAdapter = new CartAdapter(getContext(),listCartDetail);
                     //Thay đổi tiền
-                    cartAdapter.setQuantityChangeListener(CartFragment.this);
+
                     rcItemCart.setHasFixedSize(true);
                     rcItemCart.setAdapter(cartAdapter);
                     cart_subtotal_value.setText( CurrencyFormatter.formatCurrency(tongTienGioHang(listCartDetail)));
                     cartAdapter.notifyDataSetChanged();
+                    cartAdapter.setQuantityChangeListener(CartFragment.this);
                 }else{
                     Log.i("TAG","fail");
                 }

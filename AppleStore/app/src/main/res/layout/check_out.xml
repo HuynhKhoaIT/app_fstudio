@@ -70,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tên khách hàng"
+            android:textColor="@color/black"
             android:inputType="textPersonName" />
 
         <EditText
@@ -77,6 +78,8 @@
             android:layout_below="@id/et_customer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+
             android:hint="Số điện thoại"
             android:inputType="phone" />
 
@@ -84,6 +87,8 @@
             android:id="@+id/et_customer_address"
             android:layout_below="@id/et_customer_phone"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
+
             android:layout_height="wrap_content"
             android:hint="Địa chỉ"
             android:inputType="textPostalAddress" />
