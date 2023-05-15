@@ -83,4 +83,7 @@ public interface APIService {
 
     @GET("checkemail")
     Call <User> getUserByEmail(@Query("email") String email);
+
+    @PUT("khachhang")
+    Call <User> updateUser(@Query("id") int id, @Body User user);
 }

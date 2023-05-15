@@ -18,6 +18,9 @@
             android:name=".Activity.CheckoutActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.UpdateAccount"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ProductActivity"
             android:exported="false"
             android:parentActivityName=".Activity.MainActivity" />
