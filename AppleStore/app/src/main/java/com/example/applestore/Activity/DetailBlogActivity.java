@@ -1,6 +1,7 @@
 package com.example.applestore.Activity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,5 +29,20 @@ public class DetailBlogActivity extends AppCompatActivity {
             detailTitle.setText(bundle.getString("Title"));
             detailDesc.setText(bundle.getString("Desc"));
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    //    Bắt sự kiện khi bấm vào nút mũi tên quay lại
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
