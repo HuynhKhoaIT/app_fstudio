@@ -80,4 +80,7 @@ public interface APIService {
 
     @GET("donhangbymakh")
     Call<ArrayList<Order>> getListOrder(@Query("id") int id);
+
+    @GET("checkemail")
+    Call <User> getUserByEmail(@Query("email") String email);
 }
