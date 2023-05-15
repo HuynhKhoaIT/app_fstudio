@@ -86,4 +86,7 @@ public interface APIService {
 
     @PUT("khachhang")
     Call <User> updateUser(@Query("id") int id, @Body User user);
+
+    @GET("donhangbymadh")
+    Call<Order> getOrderbyID(@Query("id") int id);
 }
