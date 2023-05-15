@@ -33,6 +33,7 @@ public class DetailProductActivity extends AppCompatActivity {
     ImageView detailImage;
     Button btnAddProduct,btn_minus,btn_plus;
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
+    int amountP;
     private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,9 @@ public class DetailProductActivity extends AppCompatActivity {
             detailName.setText(bundle.getString("Title"));
             detailPrice.setText(bundle.getString("Price"));
             detailDes.setText(bundle.getString("Desc"));
+
             Glide.with(context).load(bundle.getString("Image")).into(detailImage);
+            amountP = bundle.getInt("soLuong");
         }
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,12 +81,36 @@ public class DetailProductActivity extends AppCompatActivity {
         btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int amountProduct;
+                try {
+                    String amountString = amount.getText().toString();
+                    amountProduct = Integer.parseInt(amountString);
+                } catch (NumberFormatException e) {
+                    amountProduct = 0;
+                }
+                if(amountP > amountProduct){
+                    amount.setText((amountProduct+1)+"");
+                }
+                else {
+                    Toast.makeText(context,"Vượt quá số lượng giới hạn",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
         btn_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int amountProduct;
+                try {
+                    String amountString = amount.getText().toString();
+                    amountProduct = Integer.parseInt(amountString);
+                } catch (NumberFormatException e) {
+                    amountProduct = 0;
+                }
+                //check valid
+                if(amountProduct>1){
+                    amount.setText((amountProduct-1)+"");
+                }
 
             }
         });

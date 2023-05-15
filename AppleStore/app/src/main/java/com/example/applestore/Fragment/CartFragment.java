@@ -117,7 +117,6 @@ public class CartFragment extends Fragment implements QuantityChangeListener {
     }
     @Override
     public void onQuantityChanged() {
-        Toast.makeText(getContext(),"Đã giao tiếp",Toast.LENGTH_LONG).show();
         cart_subtotal_value.setText( CurrencyFormatter.formatCurrency(tongTienGioHang(cartAdapter.getListCartDetail())));
     }
 }

@@ -39,10 +39,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
 
-        holder.orderDate.setText(order.getNgayDatHang().toString());
+        holder.orderDate.setText(order.getNgayDatHang()+"");
         holder.orderAddress.setText(order.getDiaChi());
-        holder.sumPrice.setText(order.getTongTien());
-        holder.orderStatus.setText(order.getTrangThai().toString());
+        holder.sumPrice.setText(order.getTongTien()+"");
+        holder.orderStatus.setText(order.getTrangThai().getTenTrangThai()+"");
 
 //        chưa viết onclick
     }

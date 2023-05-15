@@ -86,8 +86,8 @@ public class CheckoutActivity extends AppCompatActivity {
                 Order order = new Order();
                 order.setKhachHang(user);
                 order.setDiaChi(et_customer_address.getText().toString());
-                order.setNgayDatHang(new Date());
-                order.setTrangThai(new OrderStatus(0));
+                /*order.setNgayDatHang(new Date());*/
+                order.setTrangThai(new OrderStatus(1));
                 order.setTongTien(totalPrice);
                 createOrder(order);
 

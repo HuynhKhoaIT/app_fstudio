@@ -53,6 +53,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 intent.putExtra("Price", CurrencyFormatter.formatCurrency(mProductList.get(holder.getAdapterPosition()).getGiaBanThuong()));
                 intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getMoTa());
                 intent.putExtra("maSP",mProductList.get(holder.getAdapterPosition()).getMaSP());
+                intent.putExtra("soLuong",mProductList.get(holder.getAdapterPosition()).getSoLuong());
                 context.startActivity(intent);
             }
         });
