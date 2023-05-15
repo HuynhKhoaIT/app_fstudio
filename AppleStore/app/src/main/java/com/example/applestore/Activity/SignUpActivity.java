@@ -85,7 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
 //                    });
                     User user = new User(name,email,phone,address,pass,1,0);
                     //Database
-                    createAccount(user);
+//                    createAccount(user);
+                    createNewAccount(user);
 
                 }
             }
