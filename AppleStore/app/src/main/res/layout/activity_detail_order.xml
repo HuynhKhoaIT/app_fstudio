@@ -133,6 +133,18 @@
                     android:text="Đã giao"
                     android:textColor="#FB0808"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="bottom">
+                <Button
+                    android:id="@+id/order_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_radius"
+                    android:text="Đánh giá"/>
+            </LinearLayout>
 
         </LinearLayout>
 
