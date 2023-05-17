@@ -1,5 +1,6 @@
 package com.example.applestore.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,7 +14,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.applestore.Activity.DetailProductActivity;
 import com.example.applestore.Activity.LoginActivity;
+import com.example.applestore.Activity.UpdateAccount;
 import com.example.applestore.R;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.model.User;
@@ -34,8 +37,8 @@ public class AccountFragment extends Fragment {
     ImageView imvAvt;
     TextView tvName,tvPhone,tvEmail,tvAddress;
 
-
-
+    Button btnUpdate;
+    Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,7 +47,8 @@ public class AccountFragment extends Fragment {
         logout = view.findViewById(R.id.logout);
 
         //anh xa
-
+        context = getContext();
+        btnUpdate = (Button)view.findViewById(R.id.btnUpdate);
         tvName = (TextView)view.findViewById(R.id.tvFname);
         tvPhone = (TextView)view.findViewById(R.id.tvPhone);
         tvEmail = (TextView)view.findViewById(R.id.tvEmail);
@@ -65,6 +69,14 @@ public class AccountFragment extends Fragment {
         tvAddress.setText(user.getDiaChi());
         tvPhone.setText(user.getPhone());
         tvEmail.setText(user.getEmail());
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, UpdateAccount.class);
+                context.startActivity(intent);
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

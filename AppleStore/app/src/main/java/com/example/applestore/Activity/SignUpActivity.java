@@ -18,6 +18,7 @@ import com.example.applestore.Adapter.CategoryAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
 import com.example.applestore.SharedPreferences.SharedPrefManager;
+import com.example.applestore.model.Cart;
 import com.example.applestore.model.User;
 import com.google.android.gms.common.internal.ConnectionTelemetryConfiguration;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,14 +30,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
+import java.util.List;
 public class SignUpActivity extends AppCompatActivity {
-
     private FirebaseAuth auth;
     private EditText signupEmail, signupPassword, signupCusName, signupPhone,signupAddress;
     private Button signupButton;
     private TextView loginRedirecText;
     private Context context = this;
-
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
     @Override
@@ -54,12 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         signupButton = findViewById(R.id.signup_button);
         loginRedirecText = findViewById(R.id.loginRedirectText);
-
-
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //getValue
                 String name = signupCusName.getText().toString();
                 String email = signupEmail.getText().toString().trim();
@@ -87,28 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
 //                    });
                     User user = new User(name,email,phone,address,pass,1,0);
                     //Database
-                    Call<User> call = apiService.createUser(user);
-                    call.enqueue(new Callback<User>() {
-                        @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
-                            if(response.isSuccessful()){
-                                Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }else{
-                                Toast.makeText(SignUpActivity.this,"Đăng ký thất bại",Toast.LENGTH_LONG).show();
-                                Log.i("TAG","fail");
-                                System.out.println("Zoo - Errors");
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-                            Log.i("TAG", t.toString());
-                            System.out.println("Zoo - Errors");
-                        }
-                    });
-
+//                    createAccount(user);
+                    createNewAccount(user);
 
                 }
             }
@@ -120,5 +98,56 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+    public void createAccount(User user){
+        Call<User> call = apiService.getUserByEmail(user.getEmail());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful())
+                {
+                    User user = response.body();
+                    if(user.getEmail().equals("")){
+                        createNewAccount(user);
+                    }
+                    else {
+                        Toast.makeText(context,"Email mã tồn tại",Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Toast.makeText(context,"Email mã tồn tại",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("TAG", t.toString());
+            }
+        });
+    }
+    private  void createNewAccount(User user){
+        Call<User> call = apiService.createUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(SignUpActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(SignUpActivity.this,"Đăng ký thất bại",Toast.LENGTH_LONG).show();
+                    Log.i("TAG","fail");
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("TAG", t.toString());
+            }
+        });
+    }
+    private void checkSignup(String email){
+
+    }
+
 
 }

@@ -20,13 +20,14 @@ import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private Context context;
-    private List<Product> mProductList;
+    private ArrayList<Product> mProductList;
 
-    public ProductAdapter(Context applicationContext, List<Product> productList) {
+    public ProductAdapter(Context applicationContext, ArrayList<Product> productList) {
         this.context = applicationContext;
         mProductList = productList;
     }
@@ -51,6 +52,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getTenSP());
                 intent.putExtra("Price", CurrencyFormatter.formatCurrency(mProductList.get(holder.getAdapterPosition()).getGiaBanThuong()));
                 intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getMoTa());
+                intent.putExtra("maSP",mProductList.get(holder.getAdapterPosition()).getMaSP());
+                intent.putExtra("soLuong",mProductList.get(holder.getAdapterPosition()).getSoLuong());
                 context.startActivity(intent);
             }
         });
@@ -63,7 +66,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public ImageView productImage;
         public TextView productName;
         public TextView productPrice;
-
         public CardView productCard;
 
         public ViewHolder(View itemView) {

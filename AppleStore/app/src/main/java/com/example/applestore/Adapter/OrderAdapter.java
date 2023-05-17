@@ -1,6 +1,7 @@
 package com.example.applestore.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applestore.Activity.DetailOrderActivity;
+import com.example.applestore.Activity.ProductActivity;
 import com.example.applestore.R;
 
 import com.example.applestore.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
 
+    public static final String KEY_ORDER_TO_PRODUCT = "KEY_ORDER_TO_PRODUCT";
     private Context context;
-    private List<Order> orderList;
+    private ArrayList<Order> orderList;
 
-    public OrderAdapter(Context applicationContext, List<Order> orderList) {
+    public OrderAdapter(Context applicationContext, ArrayList<Order> orderList) {
         this.context = applicationContext;
         this.orderList = orderList;
     }
@@ -38,10 +43,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
 
-        holder.orderDate.setText(order.getNgayDatHang().toString());
+        holder.orderDate.setText(order.getNgayDatHang()+"");
         holder.orderAddress.setText(order.getDiaChi());
-        holder.sumPrice.setText(order.getTongTien());
-        holder.orderStatus.setText(order.getTrangThai().toString());
+        holder.sumPrice.setText(order.getTongTien()+"");
+        holder.orderStatus.setText(order.getTrangThai().getTenTrangThai()+"");
 
 //        chưa viết onclick
     }
@@ -61,6 +66,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             sumPrice = itemView.findViewById(R.id.sum_price);
             orderStatus = itemView.findViewById(R.id.order_status);
             cardOrder = itemView.findViewById(R.id.card_order);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, DetailOrderActivity.class);
+                    intent.putExtra(KEY_ORDER_TO_PRODUCT, getAdapterPosition());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

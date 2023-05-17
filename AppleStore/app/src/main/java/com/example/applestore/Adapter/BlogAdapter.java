@@ -17,13 +17,14 @@ import com.example.applestore.model.Blog;
 import com.example.applestore.Activity.DetailBlogActivity;
 import com.example.applestore.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogViewHolder> {
     private Context context;
-    private List<Blog> blogList;
+    private ArrayList<Blog> blogList;
 
-    public BlogAdapter(Context applicationContext, List<Blog> blogList) {
+    public BlogAdapter(Context applicationContext, ArrayList<Blog> blogList) {
         this.context = applicationContext;
         this.blogList = blogList;
     }

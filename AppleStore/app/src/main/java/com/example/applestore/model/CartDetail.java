@@ -26,6 +26,11 @@ public class CartDetail implements Serializable {
         this.soLuong = soLuong;
         this.idDelete = idDelete;
     }
+    public CartDetail(int idSP,int soLuong) {
+        this.sanPham3 = new Product(idSP);
+        this.soLuong = soLuong;
+        this.idDelete = 0;
+    }
 
     public int getMaCTGH() {
         return maCTGH;

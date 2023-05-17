@@ -57,17 +57,17 @@
                 android:drawableLeft="@drawable/ic_person_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
-            <EditText
-                android:id="@+id/update_email"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_editext"
-                android:drawableLeft="@drawable/ic_email"
-                android:drawablePadding="8dp"
-                android:hint="Email"
-                android:padding="8dp"
-                android:textColor="@color/black" />
+<!--            <EditText-->
+<!--                android:id="@+id/update_email"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@drawable/custom_editext"-->
+<!--                android:drawableLeft="@drawable/ic_email"-->
+<!--                android:drawablePadding="8dp"-->
+<!--                android:hint="Email"-->
+<!--                android:padding="8dp"-->
+<!--                android:textColor="@color/black" />-->
 
             <EditText
                 android:layout_width="match_parent"

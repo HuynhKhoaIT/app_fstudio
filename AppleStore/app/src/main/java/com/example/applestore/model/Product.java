@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product implements Serializable {
@@ -30,14 +31,17 @@ public class Product implements Serializable {
     @SerializedName("isDeteted")
     int isDeteted;
     @SerializedName("listAnhSanPham")
-    private List<ProductPicture> listAnhSanPham;
+    private ArrayList<ProductPicture> listAnhSanPham;
     @SerializedName("listCTDH")
-    private  List<OrderDetail> listCTDH;
+    private  ArrayList<OrderDetail> listCTDH;
 
     public Product() {
     }
+    public Product(int maSP) {
+        this.maSP = maSP;
+    }
 
-    public Product(int maSP, Category danhMuc, String tenSP, String moTa, int giaGoc, int giaBanThuong, int giaKhuyenMai, int soLuong, String anh, String moTaNgan, int isDeteted, List<ProductPicture> listAnhSanPham, List<OrderDetail> listCTDH) {
+    public Product(int maSP, Category danhMuc, String tenSP, String moTa, int giaGoc, int giaBanThuong, int giaKhuyenMai, int soLuong, String anh, String moTaNgan, int isDeteted, ArrayList<ProductPicture> listAnhSanPham, ArrayList<OrderDetail> listCTDH) {
         this.maSP = maSP;
         this.danhMuc = danhMuc;
         this.tenSP = tenSP;
@@ -141,19 +145,19 @@ public class Product implements Serializable {
         this.isDeteted = isDeteted;
     }
 
-    public List<ProductPicture> getListAnhSanPham() {
+    public ArrayList<ProductPicture> getListAnhSanPham() {
         return listAnhSanPham;
     }
 
-    public void setListAnhSanPham(List<ProductPicture> listAnhSanPham) {
+    public void setListAnhSanPham(ArrayList<ProductPicture> listAnhSanPham) {
         this.listAnhSanPham = listAnhSanPham;
     }
 
-    public List<OrderDetail> getListCTDH() {
+    public ArrayList<OrderDetail> getListCTDH() {
         return listCTDH;
     }
 
-    public void setListCTDH(List<OrderDetail> listCTDH) {
+    public void setListCTDH(ArrayList<OrderDetail> listCTDH) {
         this.listCTDH = listCTDH;
     }
 }

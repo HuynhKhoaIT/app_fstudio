@@ -3,6 +3,7 @@ package com.example.applestore.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Order implements Serializable {
     @SerializedName("ngayDatHang")
     Date ngayDatHang;
     @SerializedName("listChiTietDonHang")
-    private List<OrderDetail> listChiTietDonHang;
+    private ArrayList<OrderDetail> listChiTietDonHang;
     @SerializedName("trangThai")
     private OrderStatus trangThai;
     @SerializedName("khachHang")
@@ -26,7 +27,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int maDH, int tongTien, String diaChi, Date ngayDatHang, List<OrderDetail> listChiTietDonHang, OrderStatus trangThai, User khachHang) {
+    public Order(int maDH, int tongTien, String diaChi, Date ngayDatHang, ArrayList<OrderDetail> listChiTietDonHang, OrderStatus trangThai, User khachHang) {
         this.maDH = maDH;
         this.tongTien = tongTien;
         this.diaChi = diaChi;
@@ -68,11 +69,11 @@ public class Order implements Serializable {
         this.ngayDatHang = ngayDatHang;
     }
 
-    public List<OrderDetail> getListChiTietDonHang() {
+    public ArrayList<OrderDetail> getListChiTietDonHang() {
         return listChiTietDonHang;
     }
 
-    public void setListChiTietDonHang(List<OrderDetail> listChiTietDonHang) {
+    public void setListChiTietDonHang(ArrayList<OrderDetail> listChiTietDonHang) {
         this.listChiTietDonHang = listChiTietDonHang;
     }
 

@@ -17,14 +17,15 @@ import com.example.applestore.R;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewholder> {
     private static Context context;
-    List<Category> array;
+    ArrayList<Category> array;
     public static final String KEY_CATEGORYID_TO_PRODUCT = "KEY_CATEGORYID_TO_PRODUCT";
-    List<Product> mProductList;
-    public CategoryAdapter(Context applicationContext, List<Category> array) {
+    ArrayList<Product> mProductList;
+    public CategoryAdapter(Context applicationContext, ArrayList<Category> array) {
         this.context = applicationContext;
         this.array = array;
         this.mProductList = mProductList;
