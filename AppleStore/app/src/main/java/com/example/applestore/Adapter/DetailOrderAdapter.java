@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,9 @@ public class DetailOrderAdapter  extends RecyclerView.Adapter<CheckoutAdapter.Vi
                 intent.putExtra("Title", listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getTenSP());
                 intent.putExtra("Price", CurrencyFormatter.formatCurrency(listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getGiaBanThuong()));
                 intent.putExtra("Desc", listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getMoTa());
-                intent.putExtra("maSP", listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getMaSP());
+                intent.putExtra("maSP",listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getMaSP());
+                intent.putExtra("soLuong",listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getSoLuong());
+                intent.putStringArrayListExtra("slideImage",listCartDetail.get(holder.getAdapterPosition()).getSanPham2().getURLImageSlide());
                 context.startActivity(intent);
             }
         });
@@ -67,6 +70,7 @@ public class DetailOrderAdapter  extends RecyclerView.Adapter<CheckoutAdapter.Vi
         public TextView productName;
         public TextView productPrice;
         public TextView productAmount;
+
 
         public ViewHolder(View itemView) {
             super(itemView);

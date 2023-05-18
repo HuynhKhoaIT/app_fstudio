@@ -35,6 +35,10 @@ public class User implements Serializable {
 
     public User() {
     }
+    public User(int maKH) {
+        this.maKH = maKH;
+    }
+
 
     public User(String tenKH, String email, String phone, String diaChi, String mK, int isUser, int isAdmin){
         this.tenKH = tenKH;

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".Activity.RiviewActivity">
+    tools:context=".Activity.ReviewActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +15,7 @@
         android:layout_gravity="center"
         android:textStyle="bold" />
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcItemOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -23,7 +24,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
         <Button
-            android:id="@+id/submitRating"
+            android:id="@+id/btnRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Gửi" />

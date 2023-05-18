@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.applestore.APIService.APIService;
@@ -17,6 +19,7 @@ import com.example.applestore.Adapter.OrderAdapter;
 import com.example.applestore.Adapter.ProductAdapter;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
+import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Order;
 import com.example.applestore.model.OrderDetail;
 import com.example.applestore.model.Product;
@@ -48,7 +51,9 @@ public class DetailOrderActivity extends AppCompatActivity {
 
     ArrayList<OrderDetail> listOrderDetail;
 
-    int id;
+    Button btn_order_review;
+
+    int idOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +66,23 @@ public class DetailOrderActivity extends AppCompatActivity {
         order_address = findViewById(R.id.order_address);
         order_status = findViewById(R.id.order_status);
         recOrder.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        btn_order_review = findViewById(R.id.btn_order_review);
         // Lay thong tin
         getData();
-        getOrder(id);
+        getOrder(idOrder);
+        btn_order_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ReviewActivity.class);
+                intent.putExtra(KEY_ORDER_TO_PRODUCT, idOrder);
+                context.startActivity(intent);
+            }
+        });
     }
     private void getData() {
         Intent intent = getIntent();
-        id = 1 + getIntent().getIntExtra(OrderAdapter.KEY_ORDER_TO_PRODUCT, 0);
+        idOrder = getIntent().getIntExtra(OrderAdapter.KEY_ORDER_TO_PRODUCT, 0);
+        System.out.println("Mã đơn hàng "+idOrder);
     }
     private void getOrder(int id) {
         Call <Order> call = apiService.getOrderbyID(id);
@@ -83,13 +98,12 @@ public class DetailOrderActivity extends AppCompatActivity {
                     recOrder.setHasFixedSize(true);
                     recOrder.setAdapter(detailOrderAdapter);
                     detailOrderAdapter.notifyDataSetChanged();
-                    sum_price.setText(order.getTongTien()+"");
+                    sum_price.setText(CurrencyFormatter.formatCurrency(order.getTongTien()));
                     order_date.setText(order.getNgayDatHang()+"");
                     order_address.setText(order.getDiaChi()+"");
                     order_status.setText(order.getTrangThai().getTenTrangThai());
                 }
             }
-
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
 

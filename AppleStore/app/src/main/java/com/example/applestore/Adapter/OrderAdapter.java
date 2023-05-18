@@ -16,6 +16,7 @@ import com.example.applestore.Activity.DetailOrderActivity;
 import com.example.applestore.Activity.ProductActivity;
 import com.example.applestore.R;
 
+import com.example.applestore.Utils.CurrencyFormatter;
 import com.example.applestore.model.Order;
 
 import java.util.ArrayList;
@@ -44,9 +45,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         Order order = orderList.get(position);
         holder.orderDate.setText(order.getNgayDatHang()+"");
         holder.orderAddress.setText(order.getDiaChi());
-        holder.sumPrice.setText(order.getTongTien()+"");
+        holder.sumPrice.setText(CurrencyFormatter.formatCurrency(order.getTongTien()));
         holder.orderStatus.setText(order.getTrangThai().getTenTrangThai()+"");
-
         holder.cardOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,14 +72,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             sumPrice = itemView.findViewById(R.id.sum_price);
             orderStatus = itemView.findViewById(R.id.order_status);
             cardOrder = itemView.findViewById(R.id.card_order);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailOrderActivity.class);
-                    intent.putExtra(KEY_ORDER_TO_PRODUCT, getAdapterPosition());
-                    context.startActivity(intent);
-                }
-            });
         }
     }
 }
