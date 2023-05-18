@@ -102,12 +102,14 @@ public class HomeFragment extends Fragment {
                     mRecyclerView.setAdapter(productAdapter);
                     productAdapter.notifyDataSetChanged();
                 }else{
+                    System.out.println("Lấy sản phẩm không thành công");
                     Log.i("TAG","fail");
                 }
             }
             @Override
             public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Log.i("TAG", t.toString());
+                System.out.println("Lỗi kết nối đến API");
             }
         });
     }

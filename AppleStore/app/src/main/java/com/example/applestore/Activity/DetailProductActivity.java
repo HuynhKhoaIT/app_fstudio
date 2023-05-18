@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.applestore.APIService.APIService;
 import com.example.applestore.Fragment.CartFragment;
 import com.example.applestore.R;
@@ -22,6 +25,8 @@ import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +35,7 @@ import retrofit2.Response;
 
 public class DetailProductActivity extends AppCompatActivity {
     TextView detailName,detailPrice, detailDes,amount;
-    ImageView detailImage;
+    ImageSlider imageSlider;
     Button btnAddProduct,btn_minus,btn_plus;
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
     int amountP;
@@ -40,25 +45,37 @@ public class DetailProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_product);
         // anh xa
-        btnAddProduct = findViewById(R.id.add_product);
         detailName = findViewById(R.id.name_product);
         detailPrice = findViewById(R.id.price_product);
         detailDes = findViewById(R.id.des_product);
-        detailImage = findViewById(R.id.img_product);
+        imageSlider = findViewById(R.id.imageSlideProduct);
+        amount = findViewById(R.id.amount);
+
+        btnAddProduct = findViewById(R.id.add_product);
         btn_plus = findViewById(R.id.btn_plus);
         btn_minus = findViewById(R.id.btn_minus);
-        amount = findViewById(R.id.amount);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
+            // lấy thông tin truyền bằng bundel
             detailName.setText(bundle.getString("Title"));
             detailPrice.setText(bundle.getString("Price"));
             detailDes.setText(bundle.getString("Desc"));
-
-            Glide.with(context).load(bundle.getString("Image")).into(detailImage);
             amountP = bundle.getInt("soLuong");
+            // Slide
+            ArrayList<String> arrayListImage = bundle.getStringArrayList("slideImage");
+            // add image
+            arrayListImage.add(0,bundle.getString("Image"));
+            ArrayList<SlideModel> slideModels = new ArrayList<>();
+            for(String a:arrayListImage){
+                slideModels.add(new SlideModel(a, ScaleTypes.FIT));
+            }
+            imageSlider.startSliding(3000);
+            imageSlider.setImageList(slideModels, ScaleTypes.FIT);
+
         }
+        //Event
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +135,6 @@ public class DetailProductActivity extends AppCompatActivity {
     private void addProductToCart(int amountProduct,int idSP,int idKH){
         //tạo ra 1 CartDetail
         CartDetail cartDetail = new CartDetail(idSP,amountProduct);
-
         Call<CartDetail> call = apiService.addProductToCart(cartDetail,idKH);
         call.enqueue(new Callback<CartDetail>() {
             @Override
@@ -127,7 +143,6 @@ public class DetailProductActivity extends AppCompatActivity {
                 {
                     System.out.println(response.body());
                     Toast.makeText(context,"Thêm thành công",Toast.LENGTH_LONG).show();
-
                 }
                 else {
                     Toast.makeText(context,"Thêm sản phẩm thất bại",Toast.LENGTH_LONG).show();
@@ -139,7 +154,7 @@ public class DetailProductActivity extends AppCompatActivity {
             }
         });
     }
-//    Bắt sự kiện khi bấm vào nút mũi tên quay lại
+    //    Bắt sự kiện khi bấm vào nút mũi tên quay lại
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())

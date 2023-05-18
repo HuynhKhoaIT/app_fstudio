@@ -160,4 +160,12 @@ public class Product implements Serializable {
     public void setListCTDH(ArrayList<OrderDetail> listCTDH) {
         this.listCTDH = listCTDH;
     }
+
+    public ArrayList<String> getURLImageSlide(){
+        ArrayList listImageSlide = new ArrayList();
+        for (ProductPicture picture:listAnhSanPham) {
+            listImageSlide.add(picture.getAnh());
+        }
+        return listImageSlide;
+    }
 }

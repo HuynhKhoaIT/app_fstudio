@@ -47,6 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Chuyển thông tin sang file product
                 Intent intent = new Intent(context, DetailProductActivity.class);
                 intent.putExtra("Image", mProductList.get(holder.getAdapterPosition()).getAnh());
                 intent.putExtra("Title", mProductList.get(holder.getAdapterPosition()).getTenSP());
@@ -54,6 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 intent.putExtra("Desc", mProductList.get(holder.getAdapterPosition()).getMoTa());
                 intent.putExtra("maSP",mProductList.get(holder.getAdapterPosition()).getMaSP());
                 intent.putExtra("soLuong",mProductList.get(holder.getAdapterPosition()).getSoLuong());
+                intent.putStringArrayListExtra("slideImage",mProductList.get(holder.getAdapterPosition()).getURLImageSlide());
                 context.startActivity(intent);
             }
         });
