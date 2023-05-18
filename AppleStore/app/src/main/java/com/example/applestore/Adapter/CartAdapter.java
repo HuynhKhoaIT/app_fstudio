@@ -54,7 +54,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
         CartDetail cartDetail = listCartDetail.get(position);
-
         holder.productName.setText(cartDetail.getSanPham3().getTenSP());
         holder.productPrice.setText(CurrencyFormatter.formatCurrency(cartDetail.getSanPham3().getGiaBanThuong()));
         Glide.with(context).load(cartDetail.getSanPham3().getAnh()).into(holder.productImage);
@@ -78,9 +77,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
                 int idKH = SharedPrefManager.getInstance(context).getUser().getMaKH();
                 System.out.println(idSP+"/"+idKH);
                 removeItemInCart(idSP,idKH,holder.getAdapterPosition());
-                if(listener!=null){
-                    listener.onQuantityChanged();
-                }
             }
         });
         // giảm sản phẩm
@@ -91,13 +87,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
                 if(cartDetail.getSanPham3().getSoLuong()>1){
                     System.out.println(cartDetail.getSoLuong()-1);
                     holder.productAmount.setText((cartDetail.getSoLuong()-1)+"");
-
                     //cập nhật cartDetail
                     updateCartDetail(holder.getAdapterPosition(),-1);
-
-                    if (listener != null) {
-                        listener.onQuantityChanged();
-                    }
                 }
                 else{
                     int idSP = cartDetail.getSanPham3().getMaSP();
@@ -116,10 +107,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
                     //cập nhật cartDetail
                     updateCartDetail(holder.getAdapterPosition(),1);
-
-                    if (listener != null) {
-                        listener.onQuantityChanged();
-                    }
                     notifyDataSetChanged();
                 }
                 else {
@@ -142,6 +129,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
                 if(response.isSuccessful()){
                     listCartDetail.get(position).setSoLuong(listCartDetail.get(position).getSoLuong()+soluongtang);
                     notifyItemChanged(position);
+                    if (listener != null) {
+                        listener.onQuantityChanged();
+                    }
                 }
             }
             @Override
@@ -152,14 +142,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
     // xóa sản phẩm ra khỏi giỏ hàng
     public void removeItemInCart(int idSP, int idKH,int position){
+        System.out.println("Zoo hàm xóa");
         Call<CartDetail> call = apiService.deleteCartItem(idKH,idSP);
         call.enqueue(new Callback<CartDetail>() {
             @Override
             public void onResponse(Call<CartDetail> call, Response<CartDetail> response) {
                 if(response.isSuccessful())
                 {
+                    System.out.println("Xóa thành công");
                     Toast.makeText(context,"Xóa thành công",Toast.LENGTH_LONG).show();
+                    System.out.println("Trước khi xóa"+listCartDetail.size());
                     listCartDetail.remove(position);
+                    System.out.println("Sau khi xóa"+listCartDetail.size());
+                    if (listener != null) {
+                        listener.onQuantityChanged();
+                    }
                     notifyDataSetChanged();
                 }
                 else {

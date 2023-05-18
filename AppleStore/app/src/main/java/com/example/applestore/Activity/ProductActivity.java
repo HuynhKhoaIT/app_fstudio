@@ -54,7 +54,7 @@ public class ProductActivity extends AppCompatActivity {
     }
     private void getData() {
         Intent intent = getIntent();
-        id = 1 + getIntent().getIntExtra(CategoryAdapter.KEY_CATEGORYID_TO_PRODUCT, 0);
+        id = getIntent().getIntExtra(CategoryAdapter.KEY_CATEGORYID_TO_PRODUCT, 0);
     }
     private void getProducts() {
         Call<ArrayList<Product>> call = apiService.getSanPhamByDanhMuc(id);

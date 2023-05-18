@@ -42,13 +42,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
-
         holder.orderDate.setText(order.getNgayDatHang()+"");
         holder.orderAddress.setText(order.getDiaChi());
         holder.sumPrice.setText(order.getTongTien()+"");
         holder.orderStatus.setText(order.getTrangThai().getTenTrangThai()+"");
 
-//        chưa viết onclick
+        holder.cardOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailOrderActivity.class);
+                intent.putExtra(KEY_ORDER_TO_PRODUCT, orderList.get(holder.getAdapterPosition()).getMaDH());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

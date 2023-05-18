@@ -28,7 +28,6 @@ public class DetailOrderAdapter  extends RecyclerView.Adapter<CheckoutAdapter.Vi
         this.context = context;
         this.listCartDetail = listCartDetail;
     }
-
     @NonNull
     @Override
     public CheckoutAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
