@@ -18,6 +18,9 @@
             android:name=".Activity.RiviewActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.CheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DetailOrderActivity"
             android:exported="false" />
         <activity
