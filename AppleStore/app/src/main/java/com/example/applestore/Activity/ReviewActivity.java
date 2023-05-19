@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.applestore.APIService.APIService;
 import com.example.applestore.Adapter.DetailOrderAdapter;
@@ -31,7 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReviewActivity extends AppCompatActivity {
-    RecyclerView rcItemOrder;
+    RecyclerView rcItemReview;
     Button btnRating;
     Context context = this;
     int idOrder;
@@ -40,6 +42,7 @@ public class ReviewActivity extends AppCompatActivity {
     ArrayList<OrderDetail> listOrderDetail;
 
     ReviewAdapter reviewAdapter;
+    ArrayList<Review> listReview;
 
     User user;
 
@@ -48,7 +51,7 @@ public class ReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         // anh xa
-        rcItemOrder = findViewById(R.id.rcItemOrder);
+        rcItemReview = findViewById(R.id.rcItemReview);
         btnRating = findViewById(R.id.btnRating);
         getData();
         getOrder(idOrder);
@@ -56,13 +59,10 @@ public class ReviewActivity extends AppCompatActivity {
         btnRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // xây dựng 1 list các review
-                //1. thông tin gồm có sản phẩm
-                //2. thông tin khách hàng
-                //3. thông tin về số sao review
-                //4. thông tin về review chữ
-                // tạo các đánh giá
-                ArrayList<Review> listReview = new ArrayList<>();
+                for(Review r: listReview){
+                    System.out.println(r.getVote() +"-"+r.getNoiDung());
+                }
+                createReview(listReview);
             }
         });
 
@@ -75,6 +75,28 @@ public class ReviewActivity extends AppCompatActivity {
         user = SharedPrefManager.getInstance(context).getUser();
     }
 
+    private void createReview(ArrayList<Review> listReview){
+        Call<ArrayList<Review>> call = apiService.createListReview(listReview);
+        call.enqueue(new Callback<ArrayList<Review>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Review>> call, Response<ArrayList<Review>> response) {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(ReviewActivity.this, "Đánh giá thành công", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(ReviewActivity.this, "Đánh giá không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Review>> call, Throwable t) {
+                Log.i("TAG",t.toString());
+                System.out.println("Lỗi kết nói API");
+            }
+        });
+    }
     private void getOrder(int id) {
         Call<Order> call = apiService.getOrderbyID(id);
         call.enqueue(new Callback<Order>() {
@@ -85,10 +107,16 @@ public class ReviewActivity extends AppCompatActivity {
                     Order order = response.body();
                     System.out.println("Chi tiết đơn hàng: "+order.getListChiTietDonHang().size());
                     listOrderDetail = order.getListChiTietDonHang();
-                    rcItemOrder.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-                    reviewAdapter = new ReviewAdapter(context, listOrderDetail);
-                    rcItemOrder.setHasFixedSize(true);
-                    rcItemOrder.setAdapter(reviewAdapter);
+                    System.out.println(listOrderDetail.size());
+                    listReview = new ArrayList<>();
+                    // tạo ra listReview từ listOrder
+                    for(OrderDetail o: listOrderDetail){
+                        listReview.add(new Review(o.getSanPham2(),user,"",5));
+                    }
+                    rcItemReview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                    reviewAdapter = new ReviewAdapter(context,listReview);
+                    rcItemReview.setHasFixedSize(true);
+                    rcItemReview.setAdapter(reviewAdapter);
                     reviewAdapter.notifyDataSetChanged();
                 }
             }

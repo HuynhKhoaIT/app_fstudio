@@ -8,7 +8,7 @@ import java.util.List;
 
 public class OrderStatus implements Serializable {
 
-    C("maTrangThai")
+    @SerializedName("maTrangThai")
     int maTrangThai;
     @SerializedName("tenTrangThai")
     String tenTrangThai;
