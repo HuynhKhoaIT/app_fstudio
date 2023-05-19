@@ -2,6 +2,8 @@ package com.example.applestore.Activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +20,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.applestore.APIService.APIService;
+import com.example.applestore.Adapter.ProductReviewAdapter;
 import com.example.applestore.Fragment.CartFragment;
 import com.example.applestore.R;
 import com.example.applestore.Retrofit.RetrofitClient;
@@ -25,6 +28,7 @@ import com.example.applestore.SharedPreferences.SharedPrefManager;
 import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Product;
+import com.example.applestore.model.Review;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +41,13 @@ public class DetailProductActivity extends AppCompatActivity {
     TextView detailName,detailPrice, detailDes,amount;
     ImageSlider imageSlider;
     Button btnAddProduct,btn_minus,btn_plus;
+
+    RecyclerView rcReview;
     APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-    int amountP;
+    int amountP,idSP;
+    ArrayList<Review> reviews;
     private Context context = this;
+    ProductReviewAdapter productReviewAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +58,12 @@ public class DetailProductActivity extends AppCompatActivity {
         detailDes = findViewById(R.id.des_product);
         imageSlider = findViewById(R.id.imageSlideProduct);
         amount = findViewById(R.id.amount);
-
         btnAddProduct = findViewById(R.id.add_product);
         btn_plus = findViewById(R.id.btn_plus);
         btn_minus = findViewById(R.id.btn_minus);
+        rcReview = findViewById(R.id.recReview);
+        rcReview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle = getIntent().getExtras();
@@ -63,6 +73,8 @@ public class DetailProductActivity extends AppCompatActivity {
             detailPrice.setText(bundle.getString("Price"));
             detailDes.setText(bundle.getString("Desc"));
             amountP = bundle.getInt("soLuong");
+            idSP = bundle.getInt("maSP");
+
             // Slide
             ArrayList<String> arrayListImage = bundle.getStringArrayList("slideImage");
             // add image
@@ -75,6 +87,7 @@ public class DetailProductActivity extends AppCompatActivity {
             imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
         }
+        getReviews(idSP);
         //Event
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +141,27 @@ public class DetailProductActivity extends AppCompatActivity {
                 if(amountProduct>1){
                     amount.setText((amountProduct-1)+"");
                 }
+
+            }
+        });
+    }
+    private void getReviews(int idSP){
+        Call<ArrayList<Review>> call = apiService.getListReview(idSP);
+        call.enqueue(new Callback<ArrayList<Review>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Review>> call, Response<ArrayList<Review>> response) {
+                if(response.isSuccessful()){
+                    System.out.println("Lay review thanh cong");
+                    reviews = response.body();
+                    productReviewAdapter = new ProductReviewAdapter(context,reviews);
+                    rcReview.setHasFixedSize(true);
+                    rcReview.setAdapter(productReviewAdapter);
+                    productReviewAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Review>> call, Throwable t) {
 
             }
         });

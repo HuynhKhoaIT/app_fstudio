@@ -6,6 +6,7 @@ import com.example.applestore.model.CartDetail;
 import com.example.applestore.model.Category;
 import com.example.applestore.model.Order;
 import com.example.applestore.model.Product;
+import com.example.applestore.model.Review;
 import com.example.applestore.model.User;
 import com.google.gson.JsonObject;
 
@@ -89,4 +90,10 @@ public interface APIService {
 
     @GET("donhangbymadh")
     Call<Order> getOrderbyID(@Query("id") int id);
+
+    @POST("listdanhgia")
+    Call<ArrayList<Review>> createListReview(@Body ArrayList<Review> review);
+
+    @GET("danhgiabymasp")
+    Call<ArrayList<Review>> getListReview(@Query("masp") int masp);
 }
