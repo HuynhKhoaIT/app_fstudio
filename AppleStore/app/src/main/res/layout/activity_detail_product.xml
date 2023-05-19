@@ -21,15 +21,14 @@
                 android:orientation="horizontal">
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:cardBackgroundColor="@color/primary"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="300dp"
+                    app:cardBackgroundColor="#EFECEC"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="20dp">
 
                     <com.denzcoskun.imageslider.ImageSlider
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/imageSlideProduct"
                         app:iss_corner_radius="20"
                         app:iss_title_background="@drawable/gradient"/>
@@ -54,8 +53,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:gravity="center">
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@color/white">
                 <TextView
                     android:id="@+id/name_product"
                     android:layout_width="wrap_content"
@@ -64,8 +64,7 @@
                     android:layout_marginTop="10dp"
                     android:textAllCaps="true"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/price_product"
                     android:layout_width="wrap_content"
@@ -81,6 +80,8 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:gravity="center">
                 <Button
                     android:id="@+id/btn_minus"
@@ -109,6 +110,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:orientation="horizontal">
                 <Button
                     android:id="@+id/add_product"
@@ -125,6 +128,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:orientation="vertical"
                 android:background="@color/white"
                 android:layout_marginTop="10dp">
@@ -132,6 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Chi tiết sản phẩm"
+                    android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <View
                     android:layout_width="match_parent"
@@ -143,28 +149,52 @@
                     android:layout_height="wrap_content"
                     android:text="mô tả chi tiết sản phẩm"
                     android:justificationMode="inter_word"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="#B9000000"
+                    android:textSize="16sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Đánh giá sản phẩm"
-                    android:textColor="@color/black"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đánh giá sản phẩm"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"/>
+                    <RatingBar
+                        android:id="@+id/productVoteALl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:progressTint="#FFEB3B"
+                        android:rating="5"
+                        android:scaleX="0.3"
+                        android:scaleY="0.3"
+                        android:stepSize="1"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginLeft="-86dp"/>
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1sp"
+                    android:layout_marginTop="-20dp"
                     android:background="#AFAFAF"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recReview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:background="#EFECEC"
+                    android:layout_marginTop="10dp"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

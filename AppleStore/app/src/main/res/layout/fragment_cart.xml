@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.CartFragment"
-    android:background="#EFECEC"
+    android:background="@color/white"
     android:layout_marginBottom="50dp">
     <ScrollView
         android:layout_width="match_parent"
@@ -73,11 +73,13 @@
                 android:id="@+id/cart_subtotal_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/cart_subtotal_text"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/cart_subtotal_text"
                 android:text="0.00"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_toEndOf="@id/cart_subtotal_text"
-                android:layout_alignBaseline="@id/cart_subtotal_text"/>
+                android:textStyle="bold" />
 
             <!-- Checkout Button -->
             <Button
