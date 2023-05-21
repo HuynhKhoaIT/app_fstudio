@@ -97,6 +97,9 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
             }
         });
+
+        getSupportActionBar().setTitle("Sign Up");
+
     }
     public void createAccount(User user){
         Call<User> call = apiService.getUserByEmail(user.getEmail());

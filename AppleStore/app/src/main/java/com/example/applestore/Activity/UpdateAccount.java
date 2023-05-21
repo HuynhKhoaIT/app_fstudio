@@ -78,6 +78,8 @@ public class UpdateAccount extends AppCompatActivity {
             }
 
         });
+        getSupportActionBar().setTitle("Update Account");
+
     }
     //    Bắt sự kiện khi bấm vào nút mũi tên quay lại
     @Override

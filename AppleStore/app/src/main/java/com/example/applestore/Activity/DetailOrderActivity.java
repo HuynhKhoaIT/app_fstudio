@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,6 +79,8 @@ public class DetailOrderActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Detail Order");
     }
     private void getData() {
         Intent intent = getIntent();
@@ -109,6 +112,21 @@ public class DetailOrderActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+//       Bắt sự kiện khi bấm vào nút mũi tên quay lại
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

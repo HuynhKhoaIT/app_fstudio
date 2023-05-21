@@ -66,6 +66,8 @@ public class DetailProductActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Detail Product");
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             // lấy thông tin truyền bằng bundel
