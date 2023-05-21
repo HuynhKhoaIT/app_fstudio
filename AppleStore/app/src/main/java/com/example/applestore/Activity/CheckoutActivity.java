@@ -93,6 +93,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
             }
         });
+        getSupportActionBar().setTitle("Check Out");
     }
     private void createOrder(Order order){
         Call<Order> call = apiService.createOrder(order);
