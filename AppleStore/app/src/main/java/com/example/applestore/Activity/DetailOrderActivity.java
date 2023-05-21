@@ -48,6 +48,7 @@ public class DetailOrderActivity extends AppCompatActivity {
     TextView order_address;
 
     TextView order_status;
+    int tt;
 
     ArrayList<OrderDetail> listOrderDetail;
 
@@ -67,9 +68,18 @@ public class DetailOrderActivity extends AppCompatActivity {
         order_status = findViewById(R.id.order_status);
         recOrder.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         btn_order_review = findViewById(R.id.btn_order_review);
+
         // Lay thong tin
         getData();
         getOrder(idOrder);
+        System.out.println("==========");
+        System.out.println(tt);
+        if (tt==1) {
+            btn_order_review.setVisibility(View.GONE); // Ẩn nút
+        } else {
+            btn_order_review.setVisibility(View.VISIBLE); // Hiển thị nút
+        }
+
         btn_order_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +93,9 @@ public class DetailOrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         idOrder = getIntent().getIntExtra(OrderAdapter.KEY_ORDER_TO_PRODUCT, 0);
         System.out.println("Mã đơn hàng "+idOrder);
+        tt = getIntent().getIntExtra(OrderAdapter.KEY_ORDER_TO_PRODUCT2,0);
+
+
     }
     private void getOrder(int id) {
         Call <Order> call = apiService.getOrderbyID(id);
@@ -102,7 +115,9 @@ public class DetailOrderActivity extends AppCompatActivity {
                     order_date.setText(order.getNgayDatHang()+"");
                     order_address.setText(order.getDiaChi()+"");
                     order_status.setText(order.getTrangThai().getTenTrangThai());
+
                 }
+
             }
             @Override
             public void onFailure(Call<Order> call, Throwable t) {

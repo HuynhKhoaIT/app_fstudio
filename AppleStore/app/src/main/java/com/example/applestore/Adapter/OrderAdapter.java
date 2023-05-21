@@ -25,6 +25,7 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
 
     public static final String KEY_ORDER_TO_PRODUCT = "KEY_ORDER_TO_PRODUCT";
+    public static final String KEY_ORDER_TO_PRODUCT2 = "KEY_ORDER_TO_PRODUCT2";
     private Context context;
     private ArrayList<Order> orderList;
 
@@ -52,6 +53,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailOrderActivity.class);
                 intent.putExtra(KEY_ORDER_TO_PRODUCT, orderList.get(holder.getAdapterPosition()).getMaDH());
+                intent.putExtra(KEY_ORDER_TO_PRODUCT2, orderList.get(holder.getAdapterPosition()).getTrangThai().getMaTrangThai());
                 context.startActivity(intent);
             }
         });
