@@ -76,7 +76,6 @@ public class OrderFragment extends Fragment {
                 }
 
             }
-
             @Override
             public void onFailure(Call<ArrayList<Order>> call, Throwable t) {
                 Log.i("TAG", t.toString());

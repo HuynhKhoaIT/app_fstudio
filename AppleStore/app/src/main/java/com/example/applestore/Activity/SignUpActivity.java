@@ -71,21 +71,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(pass.isEmpty()){
                     signupPassword.setError("Password cannot be empty");
                 }else{
-                    // Firebase
-//                    auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if(task.isSuccessful()){
-//                                Toast.makeText(SignUpActivity.this,"SignUp Successful", Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-//                            }else{
-//                                Toast.makeText(SignUpActivity.this, "Signup Failed"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
                     User user = new User(name,email,phone,address,pass,1,0);
                     //Database
-//                    createAccount(user);
+                    createAccount(user);
                     createNewAccount(user);
 
                 }
