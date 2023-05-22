@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class DetailOrderActivity extends AppCompatActivity {
     TextView order_address;
 
     TextView order_status;
+    int tt;
 
     ArrayList<OrderDetail> listOrderDetail;
 
@@ -67,9 +69,18 @@ public class DetailOrderActivity extends AppCompatActivity {
         order_status = findViewById(R.id.order_status);
         recOrder.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         btn_order_review = findViewById(R.id.btn_order_review);
+
         // Lay thong tin
         getData();
         getOrder(idOrder);
+        System.out.println("==========");
+        System.out.println(tt);
+        if (tt==1) {
+            btn_order_review.setVisibility(View.GONE); // Ẩn nút
+        } else {
+            btn_order_review.setVisibility(View.VISIBLE); // Hiển thị nút
+        }
+
         btn_order_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,11 +89,16 @@ public class DetailOrderActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Detail Order");
     }
     private void getData() {
         Intent intent = getIntent();
         idOrder = getIntent().getIntExtra(OrderAdapter.KEY_ORDER_TO_PRODUCT, 0);
         System.out.println("Mã đơn hàng "+idOrder);
+        tt = getIntent().getIntExtra(OrderAdapter.KEY_ORDER_TO_PRODUCT2,0);
+
+
     }
     private void getOrder(int id) {
         Call <Order> call = apiService.getOrderbyID(id);
@@ -102,13 +118,30 @@ public class DetailOrderActivity extends AppCompatActivity {
                     order_date.setText(order.getNgayDatHang()+"");
                     order_address.setText(order.getDiaChi()+"");
                     order_status.setText(order.getTrangThai().getTenTrangThai());
+
                 }
+
             }
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
 
             }
         });
+    }
+
+//       Bắt sự kiện khi bấm vào nút mũi tên quay lại
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

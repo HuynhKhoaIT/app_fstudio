@@ -77,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         signupRedirecText = findViewById(R.id.signUpRedirectText);
         googleBtn = findViewById(R.id.googleBtn);
 
+        getSupportActionBar().setTitle("Login");
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

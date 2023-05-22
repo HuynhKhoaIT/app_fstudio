@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,6 +94,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
             }
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Check Out");
     }
     private void createOrder(Order order){
         Call<Order> call = apiService.createOrder(order);
@@ -101,8 +104,9 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(context, "Thêm đơn hàng thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CheckoutActivity.this, MainActivity.class);
+                    Intent intent = new Intent(CheckoutActivity.this, DetailOrderActivity.class);
                     startActivity(intent);
+
                     finish();
                 }
                 else {
@@ -149,5 +153,20 @@ public class CheckoutActivity extends AppCompatActivity {
             total += quantity * price;
         }
         return total;
+    }
+
+    //       Bắt sự kiện khi bấm vào nút mũi tên quay lại
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

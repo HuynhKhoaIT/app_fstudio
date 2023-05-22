@@ -66,6 +66,8 @@ public class DetailProductActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Detail Product");
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             // lấy thông tin truyền bằng bundel
@@ -177,6 +179,7 @@ public class DetailProductActivity extends AppCompatActivity {
                 {
                     System.out.println(response.body());
                     Toast.makeText(context,"Thêm thành công",Toast.LENGTH_LONG).show();
+
                 }
                 else {
                     Toast.makeText(context,"Thêm sản phẩm thất bại",Toast.LENGTH_LONG).show();

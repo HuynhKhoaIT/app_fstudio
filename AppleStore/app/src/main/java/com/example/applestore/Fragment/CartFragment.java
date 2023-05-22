@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -77,7 +79,9 @@ public class CartFragment extends Fragment implements QuantityChangeListener {
                 context.startActivity(intent);
             }
         });
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
+        actionBar.setTitle("Cart");
         return view;
     }
     private void getCartDetail(int idUser){
