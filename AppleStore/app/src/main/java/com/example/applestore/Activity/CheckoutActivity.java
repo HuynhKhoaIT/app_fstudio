@@ -104,7 +104,7 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(context, "Thêm đơn hàng thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CheckoutActivity.this, DetailOrderActivity.class);
+                    Intent intent = new Intent(CheckoutActivity.this, MainActivity.class);
                     startActivity(intent);
 
                     finish();
