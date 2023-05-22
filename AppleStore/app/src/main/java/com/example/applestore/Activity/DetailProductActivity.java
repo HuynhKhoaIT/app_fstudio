@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class DetailProductActivity extends AppCompatActivity {
     ArrayList<Review> reviews;
     private Context context = this;
     ProductReviewAdapter productReviewAdapter;
+    RatingBar productVoteALl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class DetailProductActivity extends AppCompatActivity {
         btn_minus = findViewById(R.id.btn_minus);
         rcReview = findViewById(R.id.recReview);
         rcReview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-
+        productVoteALl = findViewById(R.id.productVoteALl);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Detail Product");
@@ -159,6 +161,7 @@ public class DetailProductActivity extends AppCompatActivity {
                     rcReview.setHasFixedSize(true);
                     rcReview.setAdapter(productReviewAdapter);
                     productReviewAdapter.notifyDataSetChanged();
+                    getAverageStar(reviews);
                 }
             }
 
@@ -167,6 +170,18 @@ public class DetailProductActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void getAverageStar(ArrayList<Review> reviews){
+        float star = 0;
+        int totalStar = 0,reviewAmount=1;
+        for(Review r:reviews){
+            totalStar+= r.getVote();
+        }
+        if(reviews.size()>0){
+            reviewAmount = reviews.size();
+        }
+        star = (float) totalStar/reviewAmount;
+        productVoteALl.setRating(star);
     }
     private void addProductToCart(int amountProduct,int idSP,int idKH){
         //tạo ra 1 CartDetail
