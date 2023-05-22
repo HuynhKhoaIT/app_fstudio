@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getProduct(){
-        Call<ArrayList<Product>> call = apiService.getTop8Product();
+        Call<ArrayList<Product>> call = apiService.getTop8ProductNotDeteled();
         call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {

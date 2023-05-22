@@ -55,7 +55,7 @@ public class ProductActivity extends AppCompatActivity {
         id = getIntent().getIntExtra(CategoryAdapter.KEY_CATEGORYID_TO_PRODUCT, 0);
     }
     private void getProducts() {
-        Call<ArrayList<Product>> call = apiService.getSanPhamByDanhMuc(id);
+        Call<ArrayList<Product>> call = apiService.getSanPhamByDanhMucNotDelete(id);
         call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {

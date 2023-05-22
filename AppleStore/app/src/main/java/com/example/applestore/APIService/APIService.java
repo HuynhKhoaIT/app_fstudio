@@ -41,8 +41,12 @@ public interface APIService {
     Call<ArrayList<Product>> getAllProduct();
     @GET("sanpham-by-dm")
     Call<ArrayList<Product>> getSanPhamByDanhMuc(@Query("maDM") int maDM);
+    @GET("sanpham-by-dm-not-delete")
+    Call<ArrayList<Product>> getSanPhamByDanhMucNotDelete(@Query("maDM") int maDM);
     @GET("top8")
     Call<ArrayList<Product>> getTop8Product();
+    @GET("top8notdelete")
+    Call<ArrayList<Product>> getTop8ProductNotDeteled();
 
     // Danh Muc
     @GET("danhmuc")
